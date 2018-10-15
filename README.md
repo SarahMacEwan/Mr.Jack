@@ -3,13 +3,13 @@ Tentative implementation of the Mr. Jack game for Comp 3721, Object Oriented Des
 
 Responsibilities:
  - Mac:
-  - View
-  - Board
-  - Clock
-  - Tile
+    - View
+    - Board
+    - Clock
+    - Tile
  - Sarah:
-  - Controller
-  - Player
-  - Character
+    - Controller
+    - Player
+    - Character
  - Both
-  - Game
+    - Game
