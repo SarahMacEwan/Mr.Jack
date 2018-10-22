@@ -1,5 +1,6 @@
+package tile;
 
-abstract class Tile {
+public abstract class Tile {
 	
 	Tile[] neighbors;			//Six neighbors maximum, index denotes location relationally, null is no Tile.
 	Tile parent;

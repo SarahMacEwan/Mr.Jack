@@ -1,3 +1,4 @@
+package tile;
 
 public class Lantern extends Tile{
 

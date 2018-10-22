@@ -1,3 +1,4 @@
+package tile;
 
 //Okay, Character as a type of Tile, with a wrapper class for sharing a spot with a Manhole?
 

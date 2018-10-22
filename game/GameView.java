@@ -1,3 +1,4 @@
+package game;
 
 /**
  * Central point for all visual components

@@ -1,3 +1,4 @@
+package tile;
 
 public class Building extends Tile{
 

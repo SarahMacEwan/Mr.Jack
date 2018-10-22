@@ -1,3 +1,4 @@
+package game;
 
 /**
  * Central point for running/processing the Mr. Jack Game
