@@ -3,7 +3,7 @@ package game;
 /**
  * Central point for all visual components
  * 
- * @author Reithger
+ * @author Mac Clevinger and Sarah MacEwan
  *
  */
 

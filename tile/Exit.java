@@ -1,5 +1,14 @@
 package tile;
 
+/**
+ * This class builds on the Tile abstract class to specifically model an Exit Tile.
+ * 
+ * The Mr. Jack Character can escape through the Exit Tiles.
+ * 
+ * @author Mac Clevinger and Sarah MacEwan
+ *
+ */
+
 public class Exit extends Tile{
 
 	boolean blocked;

@@ -3,7 +3,7 @@ package game;
 /**
  * Central point for communication between Model and View.
  * 
- * @author Reithger
+ * @author Mac Clevinger and Sarah MacEwan
  *
  */
 

@@ -1,6 +1,13 @@
 package tile;
 
-//Okay, Character as a type of Tile, with a wrapper class for sharing a spot with a Manhole?
+/**
+ * This class builds on the Tile abstract class to specifically model a Character Tile.
+ * 
+ * Characters have special abilities.
+ * 
+ * @author Mac Clevinger and Sarah MacEwan
+ *
+ */
 
 public class Character extends Tile{
 

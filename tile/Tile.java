@@ -1,5 +1,14 @@
 package tile;
 
+/**
+ * This class generically models a Tile object, of which the Board is composed.
+ * 
+ * There are many sub-types of Tiles
+ * 
+ * @author Mac Clevinger and Sarah MacEwan
+ *
+ */
+
 public abstract class Tile {
 	
 	Tile[] neighbors;			//Six neighbors maximum, index denotes location relationally, null is no Tile.

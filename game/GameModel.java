@@ -3,7 +3,7 @@ package game;
 /**
  * Central point for running/processing the Mr. Jack Game
  * 
- * @author Reithger
+ * @author Mac Clevinger and Sarah MacEwan
  *
  */
 
