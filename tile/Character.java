@@ -11,6 +11,11 @@ package tile;
 
 public class Character extends Tile{
 
+	int maxMoves;
+	boolean isSuspect;
+	String name;
+	String ability;
+	
 	public Character(Tile t) {
 		identity = 'c';
 		shareable = true;

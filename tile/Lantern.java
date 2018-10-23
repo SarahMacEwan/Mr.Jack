@@ -13,7 +13,7 @@ package tile;
 
 public class Lantern extends Tile{
 
-	boolean light;
+	boolean isOn;
 	
 	public Lantern(Tile t) {
 		identity = 'l';
