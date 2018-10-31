@@ -1,7 +1,5 @@
 package game;
 
-import tile.Tile;
-
 import character.*;
 import java.io.*;
 
