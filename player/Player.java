@@ -8,5 +8,7 @@ package player;
  */
 
 public interface Player {
-
+	
+	public abstract boolean hasWon(boolean isOver, Boolean accusation);
+	
 }

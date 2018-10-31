@@ -23,6 +23,16 @@ public class Board {
 		return null;
 	}
 	
+	public Tile[] getTiles(char key) {
+		
+		return null;
+	}
 	
+	public boolean[] getLitTiles() {
+		boolean[] whoIsLit = new boolean[start.length];
+		
+		
+		return whoIsLit;
+	}
 	
 }

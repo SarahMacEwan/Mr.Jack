@@ -1,5 +1,7 @@
 package player;
 
+import character.MrJackCharacter;
+
 /**
  * This class models the Mr. Jack type of Player for the Mr. Jack game.
  * 
@@ -11,4 +13,16 @@ package player;
 
 public class MrJack implements Player{
 
+	MrJackCharacter[] alibis;
+	
+	public MrJackCharacter whoIsMrJack() {
+		return alibis[0];
+	}
+
+	@Override
+	public boolean hasWon(boolean isOver, Boolean accusation) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
 }
