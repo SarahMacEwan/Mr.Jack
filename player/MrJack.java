@@ -13,16 +13,25 @@ import character.MrJackCharacter;
 
 public class MrJack implements Player{
 
+	MrJackCharacter mrJack;
 	MrJackCharacter[] alibis;
 	
 	public MrJackCharacter whoIsMrJack() {
-		return alibis[0];
+		return mrJack;
 	}
 
-	@Override
-	public boolean hasWon(boolean isOver, Boolean accusation) {
+	public boolean hasWonTimer(boolean isOver) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	public boolean hasWonEscape(boolean onExit) {
+		//Check if the character is lit or not if is on exit
+		return false;
+	}
+	
+	public MrJackCharacter[] getAlibis() {
+		return alibis;
 	}
 	
 }

@@ -9,4 +9,9 @@ package game;
 
 public class GameView {
 
+	
+	public void update(String everything) {
+		
+	}
+	
 }

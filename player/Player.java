@@ -1,5 +1,7 @@
 package player;
 
+import character.MrJackCharacter;
+
 /**
  * This class generically models the Players of the Mr. Jack game.
  * 
@@ -8,7 +10,7 @@ package player;
  */
 
 public interface Player {
-	
-	public abstract boolean hasWon(boolean isOver, Boolean accusation);
+
+	public abstract MrJackCharacter[] getAlibis();
 	
 }

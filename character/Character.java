@@ -6,6 +6,7 @@ public abstract class MrJackCharacter {
 	String name;
 	int numMoves;
 	boolean isSuspect;
+	boolean isLit;
 	
 	
 	public boolean canMove(char type, int distance) {
@@ -16,6 +17,14 @@ public abstract class MrJackCharacter {
 	public boolean canInteract(char type) {
 		
 		return false;
+	}
+	
+	public void setLit(boolean in) {
+		isLit = in;
+	}
+	
+	public boolean getLit() {
+		return isLit;
 	}
 	
 	public void setSuspect(boolean in) {

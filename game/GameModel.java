@@ -17,6 +17,7 @@ public class GameModel {
 
 	private static final int NUMBER_ACTIVE_CHARACTERS = 8;		//Or 4 for our small implementation
 	private static final int LANTERN_LIMIT = 4;
+	private static final int NUMBER_OF_TURNS = 8;
 	private static final String[] PLAYERS = {"Detective", "Mr.Jack"};
 	
 	Board board;
@@ -27,6 +28,7 @@ public class GameModel {
 	MrJackCharacter[] usedMrJackCharacters;
 	MrJackCharacter[] activeMrJackCharacters;
 	int player;		//If 0, Detective turn, if 1, Mr. Jack turn
+	boolean gameOver;
 	
 	MrJackCharacter currentMrJackCharacter;
 	HashSet<Integer> selectedMrJackCharacters;
@@ -34,8 +36,6 @@ public class GameModel {
 //---  Constructors   -------------------------------------------------------------------------
 	
 	public GameModel(File structure, MrJackCharacter ... potentialMrJackCharacters) {
-		mrJack = new MrJack();
-		detective = new Detective();
 		board = deriveBoard(structure);
 		allMrJackCharacters = potentialMrJackCharacters;
 	}
@@ -43,9 +43,14 @@ public class GameModel {
 //---  Game Behaviors   -----------------------------------------------------------------------
 	
 	public void startGame() {
+		mrJack = new MrJack();
+		detective = new Detective();
 		player = 0;
 		clock = deriveClock(LANTERN_LIMIT);
 		usedMrJackCharacters = deriveMrJackCharacters(allMrJackCharacters);
+		gameOver = false;
+		selectedMrJackCharacters.clear();
+		currentMrJackCharacter = null;
 	}
 	
 	public void startTurn() {
@@ -71,19 +76,31 @@ public class GameModel {
 		//ask active character if can do action provided, respond appropriately
 		return false;
 	}
-	
-	public void endTurn() {
+		
+	public boolean accuseCharacter(int choice) {
+		MrJackCharacter accused = null;
+		for(MrJackCharacter mjc : usedMrJackCharacters) {
+			if(mjc.getLocation() == choice)
+				accused = mjc;
+		}
+		gameOver = true;
+		return detective.hasWonAccusation(accused);
+	}
+
+	public boolean endTurn() {
 		clock.iterateTurn();
 		activeMrJackCharacters = clock.getTurn() % 2 == 0 ? null : activeMrJackCharacters;	//and other stuff
 		player = clock.getTurn() % 2;
+		selectedMrJackCharacters.clear();
+		currentMrJackCharacter = null;
 		removeSuspects();
 		
-		
-	}
-	
-	public boolean endGame() {
-		
-		return false;
+		if(mrJack.hasWonTimer(clock.getTurn() == NUMBER_OF_TURNS) || mrJack.hasWonEscape(board.getTileIdentity(mrJack.whoIsMrJack().getLocation()) == 'e')) {
+			gameOver = true;
+			return true;
+		}
+		else
+			return false;
 	}
 	
 //---  Getter Methods   -----------------------------------------------------------------------

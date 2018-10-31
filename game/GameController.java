@@ -2,6 +2,9 @@ package game;
 
 import tile.Tile;
 
+import character.*;
+import java.io.*;
+
 /**
  * Central point for communication between Model and View.
  * 
@@ -10,21 +13,19 @@ import tile.Tile;
  */
 
 public class GameController {
-    private Tile[] BoardLayout;
-    private int WindowSize;
-    private String GameState;
+	
+	GameModel theGame;
+	GameView theView;
+	
     String ViewLanguage; //I don't really understand derived variables??
 
 
-    public GameController(Tile[] layout, int windowSize, String state, String viewLang){
-        BoardLayout = layout;
-        WindowSize = windowSize;
-        GameState = state;
-        ViewLanguage = viewLang;
+    public GameController(File f){
+        theGame = new GameModel(f, new JohnSmith());
     }
 
-    public void updateView(String[] updates){
-        return;
+    public void updateView(){
+    	theView.update(theGame.outputGameState());
     }
 
     public void conveyAction(int[] actions){

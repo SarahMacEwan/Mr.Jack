@@ -13,12 +13,17 @@ import character.MrJackCharacter;
 
 public class Detective implements Player{
 
+	MrJackCharacter mrJack;
 	MrJackCharacter[] alibis;
 	
-	@Override
-	public boolean hasWon(boolean isOver, Boolean accusation) {
-		// TODO Auto-generated method stub
+	public boolean hasWonAccusation(MrJackCharacter accused) {
+		if(accused.equals(mrJack))
+			return true;
 		return false;
 	}
-
+	
+	public MrJackCharacter[] getAlibis() {
+		return alibis;
+	}
+	
 }
