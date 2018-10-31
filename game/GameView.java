@@ -24,12 +24,34 @@ public class GameView extends Application{
 
 
 
+
 	//instance variables go here :D
 
 	public GameView(){}
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		/*
+	This is mostly me(Sarah) messing with figuring out how to draw hexagons in JavaFx
+	Based on an example from TutorialsPoint for now :D
+	 */
+
+		//create a new polygon object
+		Polygon hexagon = new Polygon();
+
+		//add coordinates to the hexagon
+		hexagon.getPoints().addAll(new Double[]{200.0, 50.0,
+				400.0, 50.0,
+				450.0, 150.0,
+				400.0, 250.0,
+				200.0, 250.0,
+				150.0, 150.0,
+		})
+
+		Group root = new Group(hexagon);
+		Scene scene = new Scene(group, 600, 300);
+		primaryStage.setTitle("This is a test Hexagon");
+		primaryStage.show()
 
 	}
 
@@ -41,6 +63,7 @@ public class GameView extends Application{
 	public static void main(String[] args){
 		launch(args);
 	}
+
 
 	
 }
