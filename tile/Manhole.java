@@ -13,10 +13,21 @@ package tile;
 
 public class Manhole extends Tile{
 
+	boolean covered;
+	
 	public Manhole(Tile t) {
 		identity = 'm';
 		shareable = true;
 		parent = t;
+		covered = false;
+	}
+	
+	public boolean getCovered() {
+		return covered;
+	}
+	
+	public void setCovered(boolean val) {
+		covered = val;
 	}
 	
 }

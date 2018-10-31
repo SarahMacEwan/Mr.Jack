@@ -11,12 +11,12 @@ package tile;
 
 public abstract class Tile {
 	
-	Tile[] neighbors;			//Six neighbors maximum, index denotes location relationally, null is no Tile.
+	int[] neighbors;			//Six neighbors maximum, index denotes location relationally, null is no Tile.
 	Tile parent;
 	char identity;
 	boolean shareable;
 	
-	public Tile[] getNeighbors() {
+	public int[] getNeighbors() {
 		return neighbors;
 	}
 	
@@ -39,6 +39,8 @@ public abstract class Tile {
 		//Wrapper method; what are all the things in this Tile?
 	}
 	
-	
+	public void assignNeighbors(int[] in) {
+		neighbors = in;
+	}
 	
 }

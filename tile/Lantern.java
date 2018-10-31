@@ -21,4 +21,12 @@ public class Lantern extends Tile{
 		parent = t;
 	}
 	
+	public boolean getLight() {
+		return isOn;
+	}
+	
+	public void setLight(boolean val) {
+		isOn = val;
+	}
+	
 }

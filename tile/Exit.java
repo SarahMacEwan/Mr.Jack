@@ -19,4 +19,12 @@ public class Exit extends Tile{
 		parent = t;
 	}
 	
+	public void setBlocked(boolean val) {
+		blocked = val;
+	}
+	
+	public boolean getBlocked() {
+		return blocked;
+	}
+	
 }

@@ -13,8 +13,10 @@ import tile.Tile;
 
 public class Board {
 
-	Tile start;
+	Tile[] start;
 	
-	
+	public Board(String[] boardDesign) {
+		
+	}
 	
 }

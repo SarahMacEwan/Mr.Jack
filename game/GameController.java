@@ -1,5 +1,7 @@
 package game;
 
+import tile.Tile;
+
 /**
  * Central point for communication between Model and View.
  * 
