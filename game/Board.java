@@ -19,4 +19,10 @@ public class Board {
 		
 	}
 	
+	private Tile interpretInput(String in) {
+		return null;
+	}
+	
+	
+	
 }

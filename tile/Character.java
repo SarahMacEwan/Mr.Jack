@@ -9,14 +9,14 @@ package tile;
  *
  */
 
-public class Character extends Tile{
+public class CharacterToken extends Tile{
 
 	int maxMoves;
 	boolean isSuspect;
 	String name;
 	String ability;
 	
-	public Character(Tile t) {
+	public CharacterToken(Tile t) {
 		identity = 'c';
 		shareable = true;
 		parent = t;
