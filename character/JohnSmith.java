@@ -1,6 +1,14 @@
 package character;
 
-public class JohnSmith extends MrJackCharacter{
+import game.Board;
+
+public class JohnSmith extends MrJackCharacter {
+
+	private Board gameBoard;
+
+	public JohnSmith(Board board) {
+		gameBoard = board;
+	}
 
 	@Override
 	public int requiredValuesForAbility() {
@@ -10,32 +18,36 @@ public class JohnSmith extends MrJackCharacter{
 
 	@Override
 	public boolean hasToDoAbility() {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean canDoAbilityBefore() {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean canDoAbilityDuring() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean canDoAbilityAfter() {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
+
 
 	@Override
 	public boolean ability(int[] choice) {
-		// TODO Auto-generated method stub
+		//checks the selected tile is one that John Smith can deal with
+		for (int x = 0; x < choice.length; x++) {
+			char tileId = gameBoard.getTileIdentity(x);
+			if (tileId == 'l') {
+				return true;
+			}
+		}
 		return false;
 	}
-
 }
+
+

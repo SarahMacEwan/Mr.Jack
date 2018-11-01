@@ -1,7 +1,14 @@
 package character;
-import
+import game.Board;
+import tile.Tile;
 
 public class InspectorLestrade extends MrJackCharacter {
+
+	private Board gameBoard;
+
+	public InspectorLestrade(Board board){
+		gameBoard = board;
+	}
 
 	@Override
 	public int requiredValuesForAbility() {
@@ -11,31 +18,37 @@ public class InspectorLestrade extends MrJackCharacter {
 
 	@Override
 	public boolean hasToDoAbility() {
-		// TODO Auto-generated method stub
-		return false;
+		//he must do ability at some point
+		return true;
 	}
 
 	@Override
 	public boolean canDoAbilityBefore() {
-		// TODO Auto-generated method stub
-		return false;
+		//he can do ability now
+		return true;
 	}
 
 	@Override
 	public boolean canDoAbilityDuring() {
-		// TODO Auto-generated method stub
+		//he can not do ability now
 		return false;
 	}
 
 	@Override
 	public boolean canDoAbilityAfter() {
-		// TODO Auto-generated method stub
-		return false;
+		//he can do ability now
+		return true;
 	}
 
 	@Override
 	public boolean ability(int[] choice) {
 		//this is a test
+		for(int x = 0; x < choice.length; x++){
+			char tileId = gameBoard.getTileIdentity(x);
+			if(tileId == 'e'){
+				return true;
+			}
+		}
 		return false;
 	}
 
