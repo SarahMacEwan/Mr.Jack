@@ -1,17 +1,50 @@
 package character;
 
 import tile.Tile;
+import game.Board;
+import game.GameModel;
 
 public class MissStealthy extends MrJackCharacter{
 
+//---  Constant Values   ----------------------------------------------------------------------
 
-	public boolean canMove(Tile tile, int dist) {	//Through buildings, four spaces
-		return false;
+	/** Constant String object representing the name of this InspectorLestrade object*/
+	private static final String NAME = "Miss Stealthy";
+	/** Constant int value representing the total number of moves this InspectorLestrade object can do in one turn*/
+	private static final int NUM_MOVES = 4;
+	
+//---  Constructors   -------------------------------------------------------------------------
+	
+	/**
+	 * Constructor for objects of the MissStealthy class, assigning the constant values for the
+	 * object's name and number of moves. 
+	 */
+	
+	public MissStealthy() {
+		name = NAME;
+		numMoves = NUM_MOVES;
+	}
+
+//---  Operations   ---------------------------------------------------------------------------
+	
+	public boolean canMove(Tile tile, int dist) {
+		return dist <= numMoves;
 	}
 
 	@Override
+	public boolean ability(Tile[] choice) {
+		return true;
+	}
+
+	@Override
+	public void deriveFromModel(GameModel model) {
+		return;
+	}
+	
+//---  Ability Queries   ----------------------------------------------------------------------
+
+	@Override
 	public int requiredValuesForAbility() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
@@ -39,11 +72,4 @@ public class MissStealthy extends MrJackCharacter{
 		return false;
 	}
 
-	@Override
-	public boolean ability(int[] choice) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	
 }

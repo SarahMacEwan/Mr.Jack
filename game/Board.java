@@ -9,19 +9,32 @@ import tile.Tile;
  *
  */
 
-//This is Sarah testing committing things to GitHub :D
-
 public class Board {
+	
+//---  Instance Variables   -------------------------------------------------------------------
 
+	/** Tile[] object */
 	Tile[] start;
+	
+//---  Constructors   -------------------------------------------------------------------------
+	
+	/**
+	 * Constructor for Board objects that derives the contents of its Tile[]
+	 * 
+	 * @param boardDesign - String[] object describing 
+	 */
 	
 	public Board(String[] boardDesign) {
 		interpretInput(boardDesign[0]);
 	}
 	
+//---  Operations   ---------------------------------------------------------------------------
+	
 	private Tile interpretInput(String in) {
 		return null;
 	}
+	
+//---  Getter Methods   -----------------------------------------------------------------------
 	
 	public Tile[] getTiles(char key) {
 		

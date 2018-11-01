@@ -1,10 +1,8 @@
 package character;
 
 import java.util.ArrayList;
-
-import game.Board;
+import game.GameModel;
 import tile.Tile;
-import tile.Exit;
 import tile.Lantern;
 
 /**
@@ -31,8 +29,9 @@ public class JohnSmith extends MrJackCharacter {
 //---  Constructors   -------------------------------------------------------------------------
 	
 	/**
-	 * Constructor for objects of the JohnSmith class, assigning the Board object a null
-	 * which the JohnSmith class will query Lantern statuses when prompted.
+	 * Constructor for objects of the JohnSmith class, assigning constant values for the
+	 * object's name and number of moves, and also initializing the array of relevant
+	 * tiles (containing Lantern tiles.)
 	 */
 	
 	public JohnSmith() {
@@ -64,7 +63,8 @@ public class JohnSmith extends MrJackCharacter {
 		}
 	}
 	
-	public void deriveFromBoard(Board board) {
+	@Override
+	public void deriveFromModel(GameModel board) {
 		
 	}
 	

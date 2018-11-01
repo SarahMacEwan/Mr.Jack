@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.Assert.*;
 
 import static org.junit.Assert.assertEquals;
+import tile.Tile;
 
 /**
  * Created by Sarah on 2018-11-01.
@@ -16,7 +17,7 @@ public class InspectorLestradeTest {
 
     Board board = new Board(design);
 
-    InspectorLestrade lestrade = new InspectorLestrade(board);
+    InspectorLestrade lestrade = new InspectorLestrade();
 
     @Test
     public void requiredValuesForAbility() throws Exception {
@@ -50,7 +51,7 @@ public class InspectorLestradeTest {
 
     @Test
     public void ability() throws Exception {
-        int[] arr = {1, 2, 3};
+        Tile[] arr = null;
         boolean expected = lestrade.ability(arr);
         assertEquals(expected, true);
 
