@@ -36,9 +36,11 @@ public abstract class MrJackCharacter {
 	 * @param distance - int value representing how far this MrJackCharacter has already traveled. 
 	 * @return - Returns a boolean value representing whether or not we can enter the provided Tile space.
 	 */
-	
+
+
 	public boolean canMove(Tile tile, int distance) {
-		//
+		//is the given a Tile a legal tile to move to
+
 		return false;
 	}
 

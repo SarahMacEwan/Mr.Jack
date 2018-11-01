@@ -72,8 +72,7 @@ public class JohnSmith extends MrJackCharacter {
 	
 	@Override
 	public int requiredValuesForAbility() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 2;
 	}
 
 	@Override
