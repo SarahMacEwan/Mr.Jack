@@ -2,6 +2,12 @@ package character;
 import game.Board;
 import tile.Tile;
 
+/**
+ * 
+ * @author Mac Clevinger and Sarah MacEwan
+ *
+ */
+
 public class InspectorLestrade extends MrJackCharacter {
 
 	private Board gameBoard;

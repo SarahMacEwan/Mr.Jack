@@ -1,5 +1,7 @@
 package player;
 
+import java.util.ArrayList;
+
 import character.MrJackCharacter;
 
 /**
@@ -11,19 +13,30 @@ import character.MrJackCharacter;
  *
  */
 
-public class Detective implements Player{
-
-	MrJackCharacter mrJack;
-	MrJackCharacter[] alibis;
+public class Detective extends Player{
+	
+//---  Constructors   -------------------------------------------------------------------------
+	
+	public Detective() {
+		mrJack = null;
+		alibis = new ArrayList<MrJackCharacter>();
+	}
+	
+//---  Getter Methods   -----------------------------------------------------------------------
+	
+	/**
+	 * Getter method that queries whether the provided MrJackCharacter is the same as
+	 * the predefined MrJackCharacter who is Mr. Jack; that is, when accusing a character
+	 * in the game, was the correct person accused?
+	 * 
+	 * @param accused - MrJackCharacter object representing the character being accused
+	 * @return - Returns a boolean value representing the result of the accusation; true if successful, false otherwise.
+	 */
 	
 	public boolean hasWonAccusation(MrJackCharacter accused) {
 		if(accused.equals(mrJack))
 			return true;
 		return false;
 	}
-	
-	public MrJackCharacter[] getAlibis() {
-		return alibis;
-	}
-	
+
 }

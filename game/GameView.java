@@ -4,11 +4,15 @@ import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+<<<<<<< HEAD
 import javafx.scene.shape.Rectangle;
+=======
+>>>>>>> 480512c5298d7a1e97490b18a15bb2407a6a7f21
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.control.Button;
 
 /**
@@ -40,11 +44,11 @@ public class GameView extends Application{
 
 		Group root = new Group();
 
-		row1 = drawEvenRow(10, 10, root);
-		row2 = drawOddRow(60, 110, root);
-		row3 = drawEvenRow(10, 210, root);
-		row4 = drawOddRow(60, 310, root);
-		row5 = drawEvenRow(10, 410, root);
+		drawEvenRow(10, 10, root);	//row 1
+		drawOddRow(60, 110, root);	//row 2
+		drawEvenRow(10, 210, root);	//row 3
+		drawOddRow(60, 310, root);	//row 4
+		drawEvenRow(10, 410, root);	//row 5
 
 		handle();
 

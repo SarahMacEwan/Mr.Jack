@@ -6,6 +6,10 @@ public class JohnSmith extends MrJackCharacter {
 
 	private Board gameBoard;
 
+	public JohnSmith() {
+		
+	}
+	
 	public JohnSmith(Board board) {
 		gameBoard = board;
 	}

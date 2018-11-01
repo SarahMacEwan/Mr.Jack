@@ -15,10 +15,14 @@ import character.MrJackCharacter;
 
 public class GameModel {
 
-	private static final int NUMBER_ACTIVE_CHARACTERS = 8;		//Or 4 for our small implementation
+//---  Constant Values   ----------------------------------------------------------------------
+	
+	private static final int NUMBER_ACTIVE_CHARACTERS = 4;
 	private static final int LANTERN_LIMIT = 4;
-	private static final int NUMBER_OF_TURNS = 8;
+	private static final int NUMBER_OF_TURNS = 2;
 	private static final String[] PLAYERS = {"Detective", "Mr.Jack"};
+	
+//---  Instance Variables   -------------------------------------------------------------------
 	
 	Board board;
 	Detective detective;
