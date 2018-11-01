@@ -83,5 +83,4 @@ public class InspectorLestrade extends MrJackCharacter {
 		//he can do ability now
 		return true;
 	}
-
 }

@@ -4,6 +4,10 @@ import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+<<<<<<< HEAD
+import javafx.scene.shape.Rectangle;
+=======
+>>>>>>> 480512c5298d7a1e97490b18a15bb2407a6a7f21
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.*;
@@ -57,7 +61,8 @@ public class GameView extends Application{
 
 	//Drawing the GRID:
 	//method for drawing a row of 10 squares preset to size 100x100
-	public void drawEvenRow(int startX, int startY, Group group){
+	public Rectangle[] drawEvenRow(int startX, int startY, Group group){
+		Rectangle[] row = new Rectangle[10];
 		for(int x = 0; x < 10; x++){
 			int offsetX = startX + x*100;
 			Rectangle newRect = new Rectangle(offsetX, startY, 100, 100);
@@ -65,10 +70,12 @@ public class GameView extends Application{
 			newRect.setFill(Color.GREY);
 			group.getChildren().add(newRect);
 		}
+		return row;
 	}
 
 	//method for drawing a row of 9 squares preset to size 100x100
-	public void drawOddRow(int startX, int startY, Group group){
+	public Rectangle[] drawOddRow(int startX, int startY, Group group){
+		Rectangle[] row = new Rectangle[9];
 		for(int x = 0; x < 9; x++){
 			int offsetX = startX + x*100;
 			Rectangle newRect = new Rectangle(offsetX, startY, 100, 100);
@@ -76,6 +83,7 @@ public class GameView extends Application{
 			newRect.setFill(Color.GREY);
 			group.getChildren().add(newRect);
 		}
+		return row;
 	}
 
 	private Text getTextForLocation(int row, int col){
