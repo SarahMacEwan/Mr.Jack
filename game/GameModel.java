@@ -131,6 +131,8 @@ public class GameModel {
 	public boolean roundOver() {
 		return (selectedMrJackCharacters.size() == NUMBER_ACTIVE_CHARACTERS/2);
 	}
+
+	public MrJackCharacter[] getCharacters(){return allMrJackCharacters;}
 	
 //---  Helper Methods   -----------------------------------------------------------------------
 
