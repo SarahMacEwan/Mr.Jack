@@ -4,7 +4,6 @@ import tile.Tile;
 
 public class MissStealthy extends MrJackCharacter{
 
-	
 
 	public boolean canMove(Tile tile, int dist) {	//Through buildings, four spaces
 		return false;

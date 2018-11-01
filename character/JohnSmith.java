@@ -2,10 +2,26 @@ package character;
 
 import game.Board;
 
+/**
+ * 
+ * 
+ * @author Mac Clevinger and Sarah MacEwan
+ *
+ */
+
 public class JohnSmith extends MrJackCharacter {
 
-	private Board gameBoard;
+//---  Constant Values   ----------------------------------------------------------------------\
 
+	/** Constant String object representing the name of this JohnSmith object*/
+	private static final String NAME = "John Smith";
+	/** Constant int value representing the total number of moves this JohnSmith object can do in one turn*/
+	private static final int NUM_MOVES = 3;
+
+	private Board gameBoard;
+	
+//---  Constructors   -------------------------------------------------------------------------
+		
 	public JohnSmith() {
 		
 	}

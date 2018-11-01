@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4e87d14d-1878-41a4-89dc-b56579ad60b7" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/tile/CharacterToken.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/character/InspectorLestrade.java" afterPath="$PROJECT_DIR$/character/InspectorLestrade.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/character/JohnSmith.java" afterPath="$PROJECT_DIR$/character/JohnSmith.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/character/MissStealthy.java" afterPath="$PROJECT_DIR$/character/MissStealthy.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/character/MrJackCharacter.java" afterPath="$PROJECT_DIR$/character/MrJackCharacter.java" />
     </list>
@@ -50,11 +49,11 @@
       <file leaf-file-name="MissStealthy.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/character/MissStealthy.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+            <state relative-caret-position="90">
+              <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
               <folding>
-                <element signature="e#139#140#0" expanded="true" />
-                <element signature="e#191#192#0" expanded="true" />
+                <element signature="e#137#138#0" expanded="true" />
+                <element signature="e#189#190#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -75,8 +74,8 @@
       <file leaf-file-name="InspectorLestrade.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/character/InspectorLestrade.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-268">
-              <caret line="21" column="63" lean-forward="false" selection-start-line="21" selection-start-column="63" selection-end-line="21" selection-end-column="63" />
+            <state relative-caret-position="332">
+              <caret line="59" column="63" lean-forward="false" selection-start-line="59" selection-start-column="63" selection-end-line="59" selection-end-column="63" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -99,9 +98,23 @@
       <file leaf-file-name="JohnSmith.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/character/JohnSmith.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="25" lean-forward="false" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
-              <folding />
+            <state relative-caret-position="165">
+              <caret line="11" column="25" lean-forward="false" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
+              <folding>
+                <marker date="1541108508000" expanded="true" signature="673:680" ph="{...}" />
+                <marker date="1541108508000" expanded="false" signature="713:718" ph=" { " />
+                <marker date="1541108508000" expanded="false" signature="736:739" ph=" }" />
+                <marker date="1541108508000" expanded="true" signature="791:844" ph="{...}" />
+                <marker date="1541108508000" expanded="false" signature="889:894" ph=" { " />
+                <marker date="1541108508000" expanded="false" signature="906:909" ph=" }" />
+                <marker date="1541108508000" expanded="false" signature="958:963" ph=" { " />
+                <marker date="1541108508000" expanded="false" signature="975:978" ph=" }" />
+                <marker date="1541108508000" expanded="false" signature="1027:1032" ph=" { " />
+                <marker date="1541108508000" expanded="false" signature="1045:1048" ph=" }" />
+                <marker date="1541108508000" expanded="false" signature="1096:1101" ph=" { " />
+                <marker date="1541108508000" expanded="false" signature="1113:1116" ph=" }" />
+                <marker date="1541108508000" expanded="true" signature="1168:1395" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -109,9 +122,23 @@
       <file leaf-file-name="MrJackCharacter.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/character/MrJackCharacter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="555">
-              <caret line="37" column="53" lean-forward="false" selection-start-line="37" selection-start-column="53" selection-end-line="37" selection-end-column="53" />
-              <folding />
+            <state relative-caret-position="240">
+              <caret line="46" column="83" lean-forward="true" selection-start-line="46" selection-start-column="83" selection-end-line="46" selection-end-column="83" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#2779#2780#0" expanded="true" />
+                <element signature="e#2798#2799#0" expanded="true" />
+                <element signature="e#3046#3047#0" expanded="true" />
+                <element signature="e#3069#3070#0" expanded="true" />
+                <element signature="e#3349#3350#0" expanded="true" />
+                <element signature="e#3372#3373#0" expanded="true" />
+                <element signature="e#3721#3722#0" expanded="true" />
+                <element signature="e#3738#3739#0" expanded="true" />
+                <element signature="e#4000#4001#0" expanded="true" />
+                <element signature="e#4021#4022#0" expanded="true" />
+                <element signature="e#4321#4322#0" expanded="true" />
+                <element signature="e#4345#4346#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -155,8 +182,8 @@
         <option value="$PROJECT_DIR$/character/InspectorLestradeTest.java" />
         <option value="$PROJECT_DIR$/game/GameView.java" />
         <option value="$PROJECT_DIR$/game/GameController.java" />
-        <option value="$PROJECT_DIR$/character/MissStealthy.java" />
         <option value="$PROJECT_DIR$/character/InspectorLestrade.java" />
+        <option value="$PROJECT_DIR$/character/MissStealthy.java" />
         <option value="$PROJECT_DIR$/character/MrJackCharacter.java" />
       </list>
     </option>
@@ -700,7 +727,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1439" height="772" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -717,7 +744,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32874617" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3471725" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3471725" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -772,8 +799,8 @@
         <state relative-caret-position="165">
           <caret line="11" column="27" lean-forward="false" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
           <folding>
-            <element signature="e#139#140#0" expanded="true" />
-            <element signature="e#191#192#0" expanded="true" />
+            <element signature="e#137#138#0" expanded="true" />
+            <element signature="e#189#190#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -782,7 +809,21 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="4" column="25" lean-forward="false" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
-          <folding />
+          <folding>
+            <marker date="1541108508000" expanded="true" signature="673:680" ph="{...}" />
+            <marker date="1541108508000" expanded="false" signature="713:718" ph=" { " />
+            <marker date="1541108508000" expanded="false" signature="736:739" ph=" }" />
+            <marker date="1541108508000" expanded="true" signature="791:844" ph="{...}" />
+            <marker date="1541108508000" expanded="false" signature="889:894" ph=" { " />
+            <marker date="1541108508000" expanded="false" signature="906:909" ph=" }" />
+            <marker date="1541108508000" expanded="false" signature="958:963" ph=" { " />
+            <marker date="1541108508000" expanded="false" signature="975:978" ph=" }" />
+            <marker date="1541108508000" expanded="false" signature="1027:1032" ph=" { " />
+            <marker date="1541108508000" expanded="false" signature="1045:1048" ph=" }" />
+            <marker date="1541108508000" expanded="false" signature="1096:1101" ph=" { " />
+            <marker date="1541108508000" expanded="false" signature="1113:1116" ph=" }" />
+            <marker date="1541108508000" expanded="true" signature="1168:1395" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -798,7 +839,21 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="17" column="8" lean-forward="true" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="8" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2779#2780#0" expanded="true" />
+            <element signature="e#2798#2799#0" expanded="true" />
+            <element signature="e#3046#3047#0" expanded="true" />
+            <element signature="e#3069#3070#0" expanded="true" />
+            <element signature="e#3349#3350#0" expanded="true" />
+            <element signature="e#3372#3373#0" expanded="true" />
+            <element signature="e#3721#3722#0" expanded="true" />
+            <element signature="e#3738#3739#0" expanded="true" />
+            <element signature="e#4000#4001#0" expanded="true" />
+            <element signature="e#4021#4022#0" expanded="true" />
+            <element signature="e#4321#4322#0" expanded="true" />
+            <element signature="e#4345#4346#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -850,7 +905,21 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2779#2780#0" expanded="true" />
+            <element signature="e#2798#2799#0" expanded="true" />
+            <element signature="e#3046#3047#0" expanded="true" />
+            <element signature="e#3069#3070#0" expanded="true" />
+            <element signature="e#3349#3350#0" expanded="true" />
+            <element signature="e#3372#3373#0" expanded="true" />
+            <element signature="e#3721#3722#0" expanded="true" />
+            <element signature="e#3738#3739#0" expanded="true" />
+            <element signature="e#4000#4001#0" expanded="true" />
+            <element signature="e#4021#4022#0" expanded="true" />
+            <element signature="e#4321#4322#0" expanded="true" />
+            <element signature="e#4345#4346#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1084,17 +1153,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/character/MissStealthy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding>
-            <element signature="e#139#140#0" expanded="true" />
-            <element signature="e#191#192#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/character/InspectorLestradeTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="299">
@@ -1115,27 +1173,66 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/character/JohnSmith.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="25" lean-forward="false" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
-          <folding />
+        <state relative-caret-position="165">
+          <caret line="11" column="25" lean-forward="false" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
+          <folding>
+            <marker date="1541108508000" expanded="true" signature="673:680" ph="{...}" />
+            <marker date="1541108508000" expanded="false" signature="713:718" ph=" { " />
+            <marker date="1541108508000" expanded="false" signature="736:739" ph=" }" />
+            <marker date="1541108508000" expanded="true" signature="791:844" ph="{...}" />
+            <marker date="1541108508000" expanded="false" signature="889:894" ph=" { " />
+            <marker date="1541108508000" expanded="false" signature="906:909" ph=" }" />
+            <marker date="1541108508000" expanded="false" signature="958:963" ph=" { " />
+            <marker date="1541108508000" expanded="false" signature="975:978" ph=" }" />
+            <marker date="1541108508000" expanded="false" signature="1027:1032" ph=" { " />
+            <marker date="1541108508000" expanded="false" signature="1045:1048" ph=" }" />
+            <marker date="1541108508000" expanded="false" signature="1096:1101" ph=" { " />
+            <marker date="1541108508000" expanded="false" signature="1113:1116" ph=" }" />
+            <marker date="1541108508000" expanded="true" signature="1168:1395" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/character/InspectorLestrade.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-268">
-          <caret line="21" column="63" lean-forward="false" selection-start-line="21" selection-start-column="63" selection-end-line="21" selection-end-column="63" />
+        <state relative-caret-position="332">
+          <caret line="59" column="63" lean-forward="false" selection-start-line="59" selection-start-column="63" selection-end-line="59" selection-end-column="63" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/character/MissStealthy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding>
+            <element signature="e#137#138#0" expanded="true" />
+            <element signature="e#189#190#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/character/MrJackCharacter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="37" column="53" lean-forward="false" selection-start-line="37" selection-start-column="53" selection-end-line="37" selection-end-column="53" />
-          <folding />
+        <state relative-caret-position="240">
+          <caret line="46" column="83" lean-forward="true" selection-start-line="46" selection-start-column="83" selection-end-line="46" selection-end-column="83" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2779#2780#0" expanded="true" />
+            <element signature="e#2798#2799#0" expanded="true" />
+            <element signature="e#3046#3047#0" expanded="true" />
+            <element signature="e#3069#3070#0" expanded="true" />
+            <element signature="e#3349#3350#0" expanded="true" />
+            <element signature="e#3372#3373#0" expanded="true" />
+            <element signature="e#3721#3722#0" expanded="true" />
+            <element signature="e#3738#3739#0" expanded="true" />
+            <element signature="e#4000#4001#0" expanded="true" />
+            <element signature="e#4021#4022#0" expanded="true" />
+            <element signature="e#4321#4322#0" expanded="true" />
+            <element signature="e#4345#4346#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
