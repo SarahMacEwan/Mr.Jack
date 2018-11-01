@@ -19,6 +19,7 @@ public class InspectorLestrade extends MrJackCharacter {
 	@Override
 	public int requiredValuesForAbility() {
 		// TODO Auto-generated method stub
+		//how many things the user clicks on to use the ability
 		return 0;
 	}
 
