@@ -1,4 +1,5 @@
 package character;
+import
 
 public class InspectorLestrade extends MrJackCharacter {
 
@@ -34,7 +35,7 @@ public class InspectorLestrade extends MrJackCharacter {
 
 	@Override
 	public boolean ability(int[] choice) {
-		// TODO Auto-generated method stub
+		//this is a test
 		return false;
 	}
 
