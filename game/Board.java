@@ -9,8 +9,6 @@ import tile.Tile;
  *
  */
 
-//This is Sarah testing committing things to GitHub :D
-
 public class Board {
 
 	Tile[] start;

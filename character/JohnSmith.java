@@ -31,8 +31,9 @@ public class JohnSmith extends MrJackCharacter {
 //---  Constructors   -------------------------------------------------------------------------
 	
 	/**
-	 * Constructor for objects of the JohnSmith class, assigning the Board object a null
-	 * which the JohnSmith class will query Lantern statuses when prompted.
+	 * Constructor for objects of the JohnSmith class, assigning constant values for the
+	 * object's name and number of moves, and also initializing the array of relevant
+	 * tiles (containing Lantern tiles.)
 	 */
 	
 	public JohnSmith() {

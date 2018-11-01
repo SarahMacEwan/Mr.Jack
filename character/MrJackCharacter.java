@@ -37,7 +37,6 @@ public abstract class MrJackCharacter {
 	 * @return - Returns a boolean value representing whether or not we can enter the provided Tile space.
 	 */
 
-
 	public boolean canMove(Tile tile, int distance) {
 		//is the given a Tile a legal tile to move to
 

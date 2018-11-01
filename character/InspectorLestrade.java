@@ -14,7 +14,7 @@ import tile.Exit;
 
 public class InspectorLestrade extends MrJackCharacter {
 
-//---  Constant Values   ----------------------------------------------------------------------\
+//---  Constant Values   ----------------------------------------------------------------------
 	
 	/** Constant String object representing the name of this InspectorLestrade object*/
 	private static final String NAME = "Inspector Lestrade";
@@ -29,8 +29,9 @@ public class InspectorLestrade extends MrJackCharacter {
 //---  Constructors   -------------------------------------------------------------------------
 	
 	/**
-	 * Constructor for objects of the InspectorLestrade class, assigning the Board object a null
-	 * which the InspectorLestrade class will query Exit statuses when prompted.
+	 * Constructor for objects of the InspectorLestrade class, assigning constant values
+	 * for the object's name and number of moves, and also initializing the array of relevant
+	 * tiles (containing Exit tiles.)
 	 */
 	
 	public InspectorLestrade(){

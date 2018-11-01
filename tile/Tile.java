@@ -21,7 +21,7 @@ public abstract class Tile {
 	char identity;
 	/** boolean instance variable representing whether this Tile can also contain a Character or not*/
 	boolean shareable;
-	/** */
+	/** int value describing the index of this Tile object in the Board's array of Tile objects; unique identifier*/
 	int location;
 	
 //---  Setter Methods   -----------------------------------------------------------------------
