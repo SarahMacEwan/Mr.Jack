@@ -9,7 +9,7 @@ public abstract class MrJackCharacter {
 	boolean isLit;
 	
 	
-	public boolean canMove(char type, int distance) {
+	public boolean canMove(char type, int distance, int[] startLocation) {
 		//
 		return false;
 	}

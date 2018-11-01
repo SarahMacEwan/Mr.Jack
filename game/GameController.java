@@ -22,7 +22,7 @@ public class GameController {
 
 
     public GameController(File f){
-        theGame = new GameModel(f, new JohnSmith());
+        theGame = new GameModel(f, new InspectorLestrade(new Board(new String[]{""})));
     }
 
     public void updateView(){

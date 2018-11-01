@@ -1,13 +1,23 @@
 package character;
 
+import game.Board;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import org.junit.Assert.*;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by Sarah on 2018-11-01.
  */
 public class InspectorLestradeTest {
+
+    String[] design = {""};
+
+    Board board = new Board(design);
+
+    InspectorLestrade lestrade = new InspectorLestrade(board);
+
     @Test
     public void requiredValuesForAbility() throws Exception {
 
@@ -15,26 +25,34 @@ public class InspectorLestradeTest {
 
     @Test
     public void hasToDoAbility() throws Exception {
+        boolean expected = lestrade.hasToDoAbility();
+        assertEquals(expected, true);
 
     }
 
     @Test
     public void canDoAbilityBefore() throws Exception {
-
+        boolean expected = lestrade.canDoAbilityBefore();
+        assertEquals(expected, true);
     }
 
     @Test
     public void canDoAbilityDuring() throws Exception {
-
+        boolean expected = lestrade.canDoAbilityDuring();
+        assertEquals(expected, false);
     }
 
     @Test
     public void canDoAbilityAfter() throws Exception {
-
+        boolean expected = lestrade.canDoAbilityAfter();
+        assertEquals(expected, true);
     }
 
     @Test
     public void ability() throws Exception {
+        int[] arr = {1, 2, 3};
+        boolean expected = lestrade.ability(arr);
+        assertEquals(expected, true);
 
     }
 

@@ -42,7 +42,7 @@ public class InspectorLestrade extends MrJackCharacter {
 
 	@Override
 	public boolean ability(int[] choice) {
-		//this is a test
+		//returns true if the selected tile is an exit
 		for(int x = 0; x < choice.length; x++){
 			char tileId = gameBoard.getTileIdentity(x);
 			if(tileId == 'e'){

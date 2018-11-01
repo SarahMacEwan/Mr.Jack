@@ -1,11 +1,16 @@
 package character;
 
+import tile.Tile;
+
 public class MissStealthy extends MrJackCharacter{
 
 	
 	
 	@Override
-	public boolean canMove(char type, int dist) {	//Through buildings, four spaces
+	public boolean canMove(char type, int dist, int[] startLocation) {
+		//Through buildings, four spaces
+		//Tile[] startTile =;
+
 		return false;
 	}
 
