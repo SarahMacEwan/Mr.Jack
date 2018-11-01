@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import game.Board;
 import tile.Tile;
 import tile.Exit;
+import game.GameModel;
 
 /**
  * 
@@ -63,7 +64,8 @@ public class InspectorLestrade extends MrJackCharacter {
 		}
 	}
 
-	public void deriveFromBoard(Board board) {
+	@Override
+	public void deriveFromModel(GameModel model) {
 		//Find all exit tiles
 	}
 	

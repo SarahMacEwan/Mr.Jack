@@ -1,10 +1,8 @@
 package character;
 
 import java.util.ArrayList;
-
-import game.Board;
+import game.GameModel;
 import tile.Tile;
-import tile.Exit;
 import tile.Lantern;
 
 /**
@@ -65,7 +63,8 @@ public class JohnSmith extends MrJackCharacter {
 		}
 	}
 	
-	public void deriveFromBoard(Board board) {
+	@Override
+	public void deriveFromModel(GameModel board) {
 		
 	}
 	

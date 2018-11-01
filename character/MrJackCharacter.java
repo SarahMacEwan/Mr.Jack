@@ -1,7 +1,7 @@
 package character;
 
 import tile.Tile;
-import game.Board;
+import game.GameModel;
 
 /**
  * This abstract class defines the framework for which all Characters in the Mr. Jack game
@@ -38,9 +38,7 @@ public abstract class MrJackCharacter {
 	 */
 
 	public boolean canMove(Tile tile, int distance) {
-		//is the given a Tile a legal tile to move to
-
-		return false;
+		return distance <= numMoves && tile.canShare();
 	}
 
 	/**
@@ -70,10 +68,10 @@ public abstract class MrJackCharacter {
 	 * This method parses the provided Board object to transform that data into
 	 * a useful format for this MrJackCharacter's special ability.
 	 * 
-	 * @param board - Board object representing the Board for this instance of the Mr. Jack game.
+	 * @param model - GameModel object representing this instance of the Mr. Jack game.
 	 */
 	
-	public abstract void deriveFromBoard(Board board);
+	public abstract void deriveFromModel(GameModel model);
 	
 //---  Getter Methods   -----------------------------------------------------------------------
 

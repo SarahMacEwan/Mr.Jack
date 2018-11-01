@@ -4,10 +4,7 @@ import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-<<<<<<< HEAD
 import javafx.scene.shape.Rectangle;
-=======
->>>>>>> 480512c5298d7a1e97490b18a15bb2407a6a7f21
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.*;

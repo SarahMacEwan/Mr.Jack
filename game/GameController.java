@@ -8,22 +8,24 @@ import java.io.*;
  * 
  * @author Mac Clevinger and Sarah MacEwan
  *
- *
- * this is a change to the file!!!!!!!
- *
  */
 
 public class GameController {
 	
-	GameModel theGame;
-	GameView theView;
+//---  Instance Variables   -------------------------------------------------------------------
 	
-    String ViewLanguage; //I don't really understand derived variables??
+	/** */
+	GameModel theGame;
+	/** */
+	GameView theView;
 
-
+//---  Constructors   -------------------------------------------------------------------------
+	
     public GameController(File f){
-        theGame = new GameModel(f, new InspectorLestrade(new Board(new String[]{""})));
+        theGame = new GameModel(f, new InspectorLestrade());
     }
+    
+//---  Operations   ---------------------------------------------------------------------------
 
     public void updateView(){
     	theView.update(theGame.outputGameState());

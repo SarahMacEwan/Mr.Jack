@@ -2,6 +2,7 @@ package character;
 
 import tile.Tile;
 import game.Board;
+import game.GameModel;
 
 public class MissStealthy extends MrJackCharacter{
 
@@ -26,18 +27,18 @@ public class MissStealthy extends MrJackCharacter{
 
 //---  Operations   ---------------------------------------------------------------------------
 	
-	public boolean canMove(Tile tile, int dist) {	//Through buildings, four spaces
-		return false;
+	public boolean canMove(Tile tile, int dist) {
+		return dist <= numMoves;
 	}
 
 	@Override
 	public boolean ability(Tile[] choice) {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
-	public void deriveFromBoard(Board board) {
-		
+	@Override
+	public void deriveFromModel(GameModel model) {
+		return;
 	}
 	
 //---  Ability Queries   ----------------------------------------------------------------------
