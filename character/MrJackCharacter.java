@@ -1,8 +1,11 @@
 package character;
 
 import tile.Tile;
+import game.Board;
 
 /**
+ * This abstract class defines the framework for which all Characters in the Mr. Jack game
+ * must abide in what and how they do things.
  * 
  * @author Mac Clevinger and Sarah MacEwan
  *
@@ -40,28 +43,55 @@ public abstract class MrJackCharacter {
 
 	/**
 	 * This method determines whether this MrJackCharacter object can interact with
+	 * the provided of Tile or not.
 	 * 
-	 * 
-	 * @param type
-	 * @return
+	 * @param tile - Tile object upon which we query whether or not this MrJackCharacter can interact.
+	 * @return - Returns a boolean value representing whether or not this MrJackCharacter can interact with the Tile.
 	 */
 	
-	public boolean canInteract(char type) {
+	public boolean canInteract(Tile tile) {
 		
 		return false;
 	}
+
+	/**
+	 * This abstract method represents the performance of a character's special ability, such
+	 * as Sir William Gull's teleportation or John Smith's exchanging of lanterns.
+	 * 
+	 * @param choice - int[] object containing the relevant information necessary to perform this ability.  
+	 * @return - returns a boolean value representing whether or not performing this ability was successful/legal or not.
+	 */
 	
 	public abstract boolean ability(int[] choice);
 	
 //---  Getter Methods   -----------------------------------------------------------------------
 
+	/**
+	 * Getter method that requests the status of this MrJackCharacter's being 'lit' on the board.
+	 * 
+	 * @return - Returns a boolean value representing whether this MrJackCharacter is 'lit' or not.
+	 */
+	
 	public boolean getLit() {
 		return isLit;
 	}
 	
+	/**
+	 * Getter method that requests the status of this MrJackCharacter's being suspected or not.
+	 * 
+	 * @return - Returns a boolean value representing the status of this MrJackCharacter's being suspected.
+	 */
+	
 	public boolean getSuspect() {
 		return isSuspect;
 	}
+	
+	/**
+	 * Getter method that requests the index in the Tile[] used for the Board in describing which
+	 * Tile the MrJackCharacter is on.
+	 * 
+	 * @return - Returns an int value representing the Tile object that this MrJackCharacter resides on.
+	 */
 	
 	public int getLocation() {
 		return tileIndex;
@@ -69,27 +99,81 @@ public abstract class MrJackCharacter {
 	
 //---  Setter Methods   -----------------------------------------------------------------------
 	
+	/**
+	 * Setter method that assigns a value designating the status of this MrJackCharacter's being 'lit'.
+	 * 
+	 * @param in - boolean value representing the new status of this MrJackCharacter's being 'lit'.
+	 */
+	
 	public void setLit(boolean in) {
 		isLit = in;
 	}
 	
+	/**
+	 * Setter method that assigns a value designating the status of this MrJackCharacter's being suspected.
+	 * 
+	 * @param in - boolean value representing the new status of this MrJackCharacter's being suspected.
+	 */
+
 	public void setSuspect(boolean in) {
 		isSuspect = in;
 	}
 
+	/**
+	 * Setter method that assigns a value designating the location in the Tile[] in Board that this
+	 * MrJackCharacter is in.
+	 * 
+	 * @param index - int value representing the new position in the Tile[] in Board that this MrJackCharacter resides in.
+	 */
+	
 	public void setLocation(int index) {
 		tileIndex = index;
 	}
 	
 //---  Ability Queries   ----------------------------------------------------------------------
 	
+	/**
+	 * This abstract method describes the number of required integer values to be able to perform
+	 * the ability associated to this MrJackCharacter object.
+	 * 
+	 * @return - returns an int value describing the number of necessary values to perform the associated ability.
+	 */
+	
 	public abstract int requiredValuesForAbility();
+
+	/**
+	 * This abstract method describes whether or not this MrJackCharacter is required to use their
+	 * ability or not.
+	 * 
+	 * @return - returns a boolean value representing whether or not this MrJackCharacter has to do their ability.
+	 */
 	
 	public abstract boolean hasToDoAbility();
+
+	/**
+	 * This abstract method describes whether or not this MrJackCharacter can do their ability before
+	 * they perform a move action.
+	 * 
+	 * @return - Returns a boolean action describing whether or not this MrJackCharacter can do their ability before moving.
+	 */
 	
 	public abstract boolean canDoAbilityBefore();
-	
+
+	/**
+	 * This abstract method describes whether or not this MrJackCharacter can do their ability while
+	 * they perform a move action.
+	 * 
+	 * @return - Returns a boolean action describing whether or not this MrJackCharacter can do their ability while moving.
+	 */
+		
 	public abstract boolean canDoAbilityDuring();
+
+	/**
+	 * This abstract method describes whether or not this MrJackCharacter can do their ability after
+	 * they perform a move action.
+	 * 
+	 * @return - Returns a boolean action describing whether or not this MrJackCharacter can do their ability after moving.
+	 */
 	
 	public abstract boolean canDoAbilityAfter();
 
