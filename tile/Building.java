@@ -11,9 +11,17 @@ package tile;
 
 public class Building extends Tile{
 
-	public Building(Tile t) {
+//---  Constructors   -------------------------------------------------------------------------
+	
+	/**
+	 * Constructor for objects of the Building type that assigns values to the instance variables
+	 * described in the extended abstract class Tile to denote the identity and that a Character
+	 * cannot stand on it.
+	 * 
+	 */
+	
+	public Building() {
 		identity = 'b';
-		parent = t;
 		shareable = false;
 	}
 	

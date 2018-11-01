@@ -1,6 +1,7 @@
 package player;
 
 import character.MrJackCharacter;
+import java.util.ArrayList;
 
 /**
  * This class models the Mr. Jack type of Player for the Mr. Jack game.
@@ -11,27 +12,60 @@ import character.MrJackCharacter;
  *
  */
 
-public class MrJack implements Player{
-
-	MrJackCharacter mrJack;
-	MrJackCharacter[] alibis;
+public class MrJack extends Player{
+	
+//---  Constructors   -------------------------------------------------------------------------
+	
+	/**
+	 * Constructor for objects of the MrJack type that assigns a given MrJackCharacter as the saved
+	 * entity representing Mr. Jack and initializes the ArrayList<<r>MrJackCharacter> alibis object.
+	 * 
+	 * @param inJack - MrJackCharacter object describing which character in the game is Mr. Jack
+	 */
+	
+	public MrJack() {
+		mrJack = null;
+		alibis = new ArrayList<MrJackCharacter>();
+	}
+	
+//---  Getter Methods   -----------------------------------------------------------------------
+	
+	/**
+	 * Getter method that informs the caller of who Mr. Jack is; i.e, which character
+	 * is secretly Mr. Jack.
+	 * 
+	 * @return - Returns a MrJackCharacter object describing 
+	 */
 	
 	public MrJackCharacter whoIsMrJack() {
 		return mrJack;
 	}
 
+	/**
+	 * This method queries whether the MrJack Player has won the game through waiting
+	 * out the timer or not.
+	 * 
+	 * @param isOver - boolean value representing whether the game was found to have 'run out' the clock
+	 * @return - Returns a boolean value representing the victory status of this MrJack object
+	 */
+	
 	public boolean hasWonTimer(boolean isOver) {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	/**
+	 * This method queries whether the MrJack Player has won the game by having Mr. Jack
+	 * escape from the Board; this is done by placing Mr. Jack on an exit and having the turn
+	 * end with them not being 'lit'.
+	 * 
+	 * @param onExit - boolean value representing whether the Mr. Jack character is on an exit
+	 * @return - Returns a boolean value describing whether the MrJack Player has won or not.
+	 */
 	
 	public boolean hasWonEscape(boolean onExit) {
 		//Check if the character is lit or not if is on exit
 		return false;
-	}
-	
-	public MrJackCharacter[] getAlibis() {
-		return alibis;
 	}
 	
 }

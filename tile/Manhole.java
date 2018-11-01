@@ -13,18 +13,45 @@ package tile;
 
 public class Manhole extends Tile{
 
+//---  Instance Variables   -------------------------------------------------------------------
+	
+	/** boolean instance variable representing whether or not this Manhole object is blocked off or not*/
 	boolean covered;
 	
-	public Manhole(Tile t) {
+//---  Constructors   -------------------------------------------------------------------------
+	
+	/**
+	 * Constructor for objects of the Manhole type that assigns values to the instance variables
+	 * described in the extended abstract class Tile to denote the identity and that a Character
+	 * can stand on it; it also defaults the nature of this object's being covered as false.
+	 * 
+	 */
+	
+	public Manhole() {
 		identity = 'm';
 		shareable = true;
-		parent = t;
 		covered = false;
 	}
+
+//---  Getter Methods   -----------------------------------------------------------------------
+	
+	/**
+	 * Getter method that requests the status of this Manhole object's being covered or not.
+	 * 
+	 * @return - returns a boolean value representing the status of this Manhole object's being covered.
+	 */
 	
 	public boolean getCovered() {
 		return covered;
 	}
+	
+//---  Setter Methods   -----------------------------------------------------------------------
+	
+	/**
+	 * Setter method that assigns a value to specify the status of this Manhole object's being covered.
+	 * 
+	 * @param val - boolean value representing the new status of this Manhole object's being covered.
+	 */
 	
 	public void setCovered(boolean val) {
 		covered = val;
