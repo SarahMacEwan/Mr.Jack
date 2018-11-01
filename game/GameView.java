@@ -8,6 +8,7 @@ import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
 import javafx.scene.*;
 import javafx.scene.paint.Color;
@@ -36,25 +37,49 @@ public class GameView extends Application{
 	Based on an example from TutorialsPoint for now :D
 	 */
 
-		//create a new polygon object
-		Polygon hexagon = new Polygon();
+		Group root = new Group();
 
-		//add coordinates to the hexagon
-		hexagon.getPoints().addAll(new Double[]{200.0, 50.0,
-				400.0, 50.0,
-				450.0, 150.0,
-				400.0, 250.0,
-				200.0, 250.0,
-				150.0, 150.0,
-		})
+		//create a new rectangle object
+		Rectangle myRect = new Rectangle(10, 10, 50, 50);
+		myRect.setStroke(Color.BLACK);
+		myRect.setFill(Color.GREY);
+		myRect.setStrokeWidth(3);
 
-		Group root = new Group(hexagon);
-		Scene scene = new Scene(group, 600, 300);
+		drawEvenRow(10, 10, root);
+		drawOddRow(60, 110, root);
+		drawEvenRow(10, 210, root);
+		drawOddRow(60, 310, root);
+		drawEvenRow(10, 410, root);
+
+		Scene scene = new Scene(root, 600, 300);
 		primaryStage.setTitle("This is a test Hexagon");
-		primaryStage.show()
+		primaryStage.setScene(scene)
+		primaryStage.show();
 
 	}
 
+	//Drawing the GRID:
+	//method for drawing a row of 10 squares preset to size 100x100
+	public void drawEvenRow(int startX, int startY, Group group){
+		for(int x = 0; x < 10; x++){
+			int offsetX = startX + x*100;
+			Rectangle newRect = new Rectangle(offsetX, startY, 100, 100);
+			newRect.setStroke(Color.BLACK);
+			newRect.setFill(Color.GREY);
+			group.getChildren().add(newRect);
+		}
+	}
+
+	//method for drawing a row of 9 squares preset to size 100x100
+	public void drawOddRow(int startX, int startY, Group group){
+		for(int x = 0; x < 9; x++){
+			int offsetX = startX + x*100;
+			Rectangle newRect = new Rectangle(offsetX, startY, 100, 100);
+			newRect.setStroke(Color.BLACK);
+			newRect.setFill(Color.GREY);
+			group.getChildren().add(newRect);
+		}
+	}
 
 	public void update(String everything) {
 
