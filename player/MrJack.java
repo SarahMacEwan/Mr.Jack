@@ -20,7 +20,8 @@ public class MrJack extends Player{
 	 * Constructor for objects of the MrJack type that assigns a given MrJackCharacter as the saved
 	 * entity representing Mr. Jack and initializes the ArrayList<<r>MrJackCharacter> alibis object.
 	 * 
-	 * @param inJack - MrJackCharacter object describing which character in the game is Mr. Jack
+	 * @variable mrJack  - MrJackCharacter object describing which character in the game is Mr. Jack
+	 * @variable alibis - List of MrJackCharacters who have been drawn from the alibi deck (and are therefore not Mr Jack)
 	 */
 	
 	public MrJack() {
@@ -51,7 +52,7 @@ public class MrJack extends Player{
 	
 	public boolean hasWonTimer(boolean isOver) {
 		// TODO Auto-generated method stub
-		return false;
+		return isOver;
 	}
 
 	/**
@@ -65,7 +66,12 @@ public class MrJack extends Player{
 	
 	public boolean hasWonEscape(boolean onExit) {
 		//Check if the character is lit or not if is on exit
-		return false;
+		boolean litStatus = mrJack.getLit();
+		if (!litStatus || onExit){
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 }
