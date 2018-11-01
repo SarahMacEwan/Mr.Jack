@@ -29,7 +29,8 @@ public abstract class MrJackCharacter {
 //---  Operations   ---------------------------------------------------------------------------
 	
 	/**
-	 * This method determines whether, given the 
+	 * This method determines whether, given the Tile they are moving to and how far they have moved so far,
+	 * the MrJackCharacter can move onto that tile.
 	 * 
 	 * @param tile - Tile object representing the space on the Board this MrJackCharacter object is potentially entering
 	 * @param distance - int value representing how far this MrJackCharacter has already traveled. 
@@ -62,7 +63,16 @@ public abstract class MrJackCharacter {
 	 * @return - returns a boolean value representing whether or not performing this ability was successful/legal or not.
 	 */
 	
-	public abstract boolean ability(int[] choice);
+	public abstract boolean ability(Tile[] choice);
+	
+	/**
+	 * This method parses the provided Board object to transform that data into
+	 * a useful format for this MrJackCharacter's special ability.
+	 * 
+	 * @param board - Board object representing the Board for this instance of the Mr. Jack game.
+	 */
+	
+	public abstract void deriveFromBoard(Board board);
 	
 //---  Getter Methods   -----------------------------------------------------------------------
 

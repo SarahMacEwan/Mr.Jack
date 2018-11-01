@@ -20,9 +20,10 @@ public class Building extends Tile{
 	 * 
 	 */
 	
-	public Building() {
+	public Building(int loc) {
 		identity = 'b';
 		shareable = false;
+		location = loc;
 	}
 	
 }

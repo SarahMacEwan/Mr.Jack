@@ -25,10 +25,11 @@ public class Exit extends Tile{
 	 * 
 	 */
 	
-	public Exit() {
+	public Exit(int loca) {
 		identity = 'e';
 		shareable = true;
 		blocked = false;
+		location = loca;
 	}
 	
 //---  Setter Methods   -----------------------------------------------------------------------

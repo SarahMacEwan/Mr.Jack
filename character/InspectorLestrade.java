@@ -1,6 +1,9 @@
 package character;
+
+import java.util.ArrayList;
 import game.Board;
 import tile.Tile;
+import tile.Exit;
 
 /**
  * 
@@ -20,44 +23,54 @@ public class InspectorLestrade extends MrJackCharacter {
 	
 //---  Instance Variables   -------------------------------------------------------------------
 	
-	/** Board object describing the Tile layout of this instance of the Mr. Jack game*/
-	private Board gameBoard;
+	/** ArrayList<<r>Exit> object describing the Tile objects associated to this InspectorLestrade object*/
+	private ArrayList<Exit> relevantTiles;
 
 //---  Constructors   -------------------------------------------------------------------------
 	
 	/**
-	 * Constructor for objects of the InspectorLestrade class, requesting a Board object from
-	 * which the InspectorLestrade class will query Tile statuses when prompted.
-	 * 
-	 * @param board - Board object provided for this InspectorLestrade object to interact with.
+	 * Constructor for objects of the InspectorLestrade class, assigning the Board object a null
+	 * which the InspectorLestrade class will query Exit statuses when prompted.
 	 */
 	
-	public InspectorLestrade(Board board){
+	public InspectorLestrade(){
 		name = NAME;
 		numMoves = NUM_MOVES;
-		gameBoard = board;
+		relevantTiles = new ArrayList<Exit>();
 	}
 
 //---  Operations   ---------------------------------------------------------------------------
 
 	@Override
-	public boolean ability(int[] choice) {
-		//this is a test
-		for(int x = 0; x < choice.length; x++){
-			char tileId = gameBoard.getTileIdentity(x);
-			if(tileId == 'e'){
-				return true;
+	public boolean ability(Tile[] choice) {
+		Exit on = null;
+		Exit off = null;
+		for(Exit t : relevantTiles) {
+			if(t.getLocation() == choice[0].getLocation()) {
+				on = t;
+			}
+			if(t.getLocation() == choice[1].getLocation()) {
+				off = t;
 			}
 		}
-		return false;
+		if(on == null || off == null)
+			return false;
+		else {
+			on.setBlocked(true);
+			off.setBlocked(false);
+			return true;
+		}
 	}
 
+	public void deriveFromBoard(Board board) {
+		//Find all exit tiles
+	}
+	
 //---  Ability Queries   ----------------------------------------------------------------------
 	
 	@Override
 	public int requiredValuesForAbility() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 2;
 	}
 
 	@Override

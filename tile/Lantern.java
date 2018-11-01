@@ -27,10 +27,11 @@ public class Lantern extends Tile{
 	 * 
 	 */
 	
-	public Lantern() {
+	public Lantern(int loc) {
 		identity = 'l';
 		shareable = false;
 		isOn = false;
+		location = loc;
 	}
 
 //---  Getter Methods   -----------------------------------------------------------------------

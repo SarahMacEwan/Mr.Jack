@@ -21,6 +21,8 @@ public abstract class Tile {
 	char identity;
 	/** boolean instance variable representing whether this Tile can also contain a Character or not*/
 	boolean shareable;
+	/** */
+	int location;
 	
 //---  Setter Methods   -----------------------------------------------------------------------
 
@@ -67,5 +69,16 @@ public abstract class Tile {
 	
 	public boolean canShare() {
 		return shareable;
+	}
+
+	/**
+	 * Getter method that returns an int value representing the location of the Tile object
+	 * in the array it is stored within for purposes of unique differentiating between them.
+	 * 
+	 * @return - Returns an int value representing the position of this Tile in the array it is stored within.
+	 */
+	
+	public int getLocation() {
+		return location;
 	}
 }

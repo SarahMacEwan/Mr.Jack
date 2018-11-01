@@ -27,10 +27,11 @@ public class Manhole extends Tile{
 	 * 
 	 */
 	
-	public Manhole() {
+	public Manhole(int loc) {
 		identity = 'm';
 		shareable = true;
 		covered = false;
+		location = loc;
 	}
 
 //---  Getter Methods   -----------------------------------------------------------------------
