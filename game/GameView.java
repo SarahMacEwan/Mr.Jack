@@ -2,13 +2,10 @@ package game;
 
 import javafx.application.Application;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
-import javafx.scene.image.ImageView;
-import javafx.scene.image.PixelWriter;
-import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import javafx.scene.shape.Polygon;
+import javafx.scene.Rectangle;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.*;
 import javafx.scene.paint.Color;
@@ -30,6 +27,10 @@ public class GameView extends Application{
 	private Rectangle[] row3;
 	private Rectangle[] row4;
 	private Rectangle[] row5;
+	private int[] lanternLocations; //locations of the lanterns will be (this kind of depends on how the controller will input/output things)
+	private int[] manholeLocations; //locations of the manholes
+	private int[]buildings;// locations of the buildings
+	private int[] exits;// exit locations
 
 	public GameView(){}
 
@@ -77,6 +78,18 @@ public class GameView extends Application{
 		}
 	}
 
+	private Text getTextForLocation(int row, int col){
+		//method is currently never called, because I couldn't figure out how to overlay text over the rectangles
+		Text t = new Text("");
+		if(row == 3 && col == 5){
+			//this will have some if statements to determine what text, if any, should go on that location
+			//options include "Lamp", "Manhole", "Building", "Corodon", and character names
+			t.setText("Test :D");
+		}
+		return t;
+	}
+
+	//handling mouse clicks on rectanlges :D
 	private void clicksInRow1(){
 		//loop for registering clicks in row1
 		for(int x = 0; x < 10; x++){
@@ -167,6 +180,8 @@ public class GameView extends Application{
 
 
 	public void update(String everything) {
+		//this will update the ____Locations instance variables
+		//so that when we re-draw the grid, the appropriate changes are made
 
 	}
 
