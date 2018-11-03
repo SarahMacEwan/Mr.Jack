@@ -7,35 +7,75 @@ import tile.Lantern;
  * 
  * Controls the state of Lanterns, the order of play between Players.
  * 
+ * TODO: Should really be an interface between this and GameModel
+ * 
  * @author Mac Clevinger and Sarah MacEwan
  *
  */
 
 public class Clock {
 
+//---  Instance Variables   -------------------------------------------------------------------
+	
+	/** Lantern[] object containing references to all Lantern objects in the Mr. Jack game*/
 	Lantern[] lanterns;
+	/** int value representing which turn the Mr. Jack game is currently in*/
 	int turnValue;
+	/** int value representing the maximum number of lanterns that should be turned off by the progression of turns*/
 	int maxLanternsOff;
+	
+//---  Constructors   -------------------------------------------------------------------------
+	
+	/**
+	 * Constructor for objects of the Clock type, assigning the provided values for the associated
+	 * Lanterns and number of Lanterns to turn off, defaulting the turn number to 0.
+	 * 
+	 * @param givenLanterns - Lantern[] object containing references to all Lanterns in the Mr. Jack game.
+	 * @param lanternLimit - int value representing the number of Lanterns to turn off as the game progresses.
+	 */
 	
 	public Clock(Lantern[] givenLanterns, int lanternLimit) {
 		lanterns = givenLanterns;
 		turnValue = 0;
 		maxLanternsOff = lanternLimit;
 	}
+
+//---  Operations   ---------------------------------------------------------------------------
+	
+	/**
+	 * This method iterates the turn counter, progressing the game onward.
+	 * 
+	 */
 	
 	public void iterateTurn() {
 		turnValue++;
-		manageLanterns(turnValue);
+		manageLanterns();
 	}
 	
-	private void manageLanterns(int turn) {
-		if(turn <= maxLanternsOff) {
-			lanterns[turn].setLight(false);
-		}
-	}
+//---  Getter Methods   -----------------------------------------------------------------------
 
+	/**
+	 * Getter method that requests the turn counter for the associated Mr. Jack game.
+	 * 
+	 * @return - Returns an int value representing the Mr. Jack game's turn value.
+	 */
+	
 	public int getTurn() {
 		return turnValue;
 	}
+		
+//---  Helper Methods   -----------------------------------------------------------------------
+
+	/**
+	 * Helper method that interprets the current turn value for knowing how to handle
+	 * the associated Lantern objects.
+	 *  
+	 */
 	
+	private void manageLanterns() {
+		if(turnValue <= maxLanternsOff) {
+			lanterns[turnValue].setLight(false);
+		}
+	}
+
 }

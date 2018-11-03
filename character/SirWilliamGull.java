@@ -1,11 +1,7 @@
 package character;
 
-import game.Board;
-import tile.Exit;
 import tile.Tile;
 import game.GameModel;
-
-import java.util.ArrayList;
 
 public class SirWilliamGull extends MrJackCharacter{
 //---  Constant Values   ----------------------------------------------------------------------\
@@ -32,56 +28,56 @@ public class SirWilliamGull extends MrJackCharacter{
 		numMoves = NUM_MOVES;
 		characters = new MrJackCharacter[4];
 	}
+
+//---  Operations   ---------------------------------------------------------------------------
+	
 	@Override
 	public boolean ability(Tile[] choice) {
 		for(int x = 0; x < characters.length; x++){
 			//if the character on the tile is in the list of characters in play
 			//then return true, else return false
 			MrJackCharacter character = characters[x];
-			Tile tile = choice[x];
-			if(character.getLocation() == tileIndex) {
+			if(character.getLocation() == choice[0].getLocation()) {
+				int loc = character.getLocation();
+				character.setLocation(tileIndex);
+				tileIndex = loc;
 				return true;
 			}
 		}
 		return false;
 	}
 
+	@Override
 	public void deriveFromModel(GameModel game) {
 		//find all the locations of the characters in play
 		characters = game.getCharacters();
 	}
 
-
+//---  Ability Queries   ----------------------------------------------------------------------
+	
 	@Override
 	public int requiredValuesForAbility() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 1;
 	}
 
 	@Override
 	public boolean hasToDoAbility() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean canDoAbilityBefore() {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean canDoAbilityDuring() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean canDoAbilityAfter() {
-		// TODO Auto-generated method stub
 		return false;
 	}
-
-
 
 }
