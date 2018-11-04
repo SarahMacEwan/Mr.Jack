@@ -1,8 +1,11 @@
 package character;
 
+import tile.Building;
 import tile.Tile;
 import game.Board;
 import game.GameModel;
+
+import java.util.ArrayList;
 
 public class MissStealthy extends MrJackCharacter{
 
@@ -12,7 +15,11 @@ public class MissStealthy extends MrJackCharacter{
 	private static final String NAME = "Miss Stealthy";
 	/** Constant int value representing the total number of moves this InspectorLestrade object can do in one turn*/
 	private static final int NUM_MOVES = 4;
-	
+
+// --- Instance Variables ---------------------------------------------------------------------
+private ArrayList<Building> relevantTiles;
+
+
 //---  Constructors   -------------------------------------------------------------------------
 	
 	/**
@@ -28,17 +35,32 @@ public class MissStealthy extends MrJackCharacter{
 //---  Operations   ---------------------------------------------------------------------------
 	
 	public boolean canMove(Tile tile, int dist) {
-		return dist <= numMoves;
+		Tile[] tempChoice = new Tile[1];
+		tempChoice[0] = tile;
+		if((this.ability(tempChoice))&& dist <= numMoves){
+			return true;
+		} else return false;
 	}
 
 	@Override
 	public boolean ability(Tile[] choice) {
-		return true;
+		//if it's a building tile, she can move through it!
+		for(Tile tile: choice){
+			if ((tile.getIdentity() == 'b')||(tile.getIdentity() == 'm')||(tile.getIdentity() == 't')){
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@Override
 	public void deriveFromModel(GameModel model) {
-		return;
+		//Find all building tiles
+		Board gameBoard = model.getBoard();
+		Tile[] buidlings = gameBoard.getTiles('b');
+		for(Tile building: buidlings){
+			relevantTiles.add((Building)building);
+		}
 	}
 	
 //---  Ability Queries   ----------------------------------------------------------------------

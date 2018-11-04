@@ -1,7 +1,10 @@
 package character;
 
 import java.util.ArrayList;
+
+import game.Board;
 import game.GameModel;
+import tile.Exit;
 import tile.Tile;
 import tile.Lantern;
 
@@ -64,8 +67,13 @@ public class JohnSmith extends MrJackCharacter {
 	}
 	
 	@Override
-	public void deriveFromModel(GameModel board) {
-		
+	public void deriveFromModel(GameModel model) {
+		//Find all lantern tiles
+		Board gameBoard = model.getBoard();
+		Tile [] exitTileSet = gameBoard.getTiles('l');
+		for (Tile tile: exitTileSet){
+			relevantTiles.add((Lantern) tile);
+		}
 	}
 	
 //---  Ability Queries   ----------------------------------------------------------------------
