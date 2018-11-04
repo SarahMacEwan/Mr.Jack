@@ -126,11 +126,9 @@ public class GameModel {
 	 * @return - Returns a boolean value describing whether or not the chosen location was legal
 	 */
 	
-	public boolean moveMrJackCharacter(int choice) {			//Controller is told by the player whether moving or action
-		
-		
-		
-		return false;
+	public boolean moveMrJackCharacter(int choice) {
+		boolean[] reachable = board.getLegalMovement(currentMrJackCharacter);
+		return reachable[choice];
 	}
 
 	/**
@@ -142,7 +140,9 @@ public class GameModel {
 	 */
 	
 	public boolean characterAction(int[] choice) {
-		//ask active character if can do action provided, respond appropriately
+		if(choice.length == currentMrJackCharacter.requiredValuesForAbility()) {
+			return (currentMrJackCharacter.ability(board.getTiles(choice)));
+		}
 		return false;
 	}
 
@@ -262,6 +262,15 @@ public class GameModel {
 		return board;
 	}
 	
+	public int[] getCharacterLocations() {
+		int[] out = new int[activeMrJackCharacters.length];
+		int ind = 0;
+		for(MrJackCharacter mjc : activeMrJackCharacters) {
+			out[ind++] = mjc.getLocation();
+		}
+		return out;
+	}
+	
 //---  Helper Methods   -----------------------------------------------------------------------
 
 	/**
@@ -328,7 +337,7 @@ public class GameModel {
 	 */
 	
 	private void removeSuspects() {
-		boolean[] shadows = board.getLitTiles();
+		boolean[] shadows = board.getLitTiles(getCharacterLocations());
 		boolean MrJackShadow = shadows[mrJack.whoIsMrJack().getLocation()];
 		for(MrJackCharacter c : usedMrJackCharacters) {
 			if(shadows[c.getLocation()] != MrJackShadow)

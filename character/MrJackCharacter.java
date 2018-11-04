@@ -116,6 +116,15 @@ public abstract class MrJackCharacter {
 		return name;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
+	
+	public int getDistance() {
+		return numMoves;
+	}
+	
 //---  Setter Methods   -----------------------------------------------------------------------
 	
 	/**
