@@ -133,6 +133,10 @@ public class GameModel {
 	}
 
 	public MrJackCharacter[] getCharacters(){return allMrJackCharacters;}
+
+	public Board getBoard(){
+		return board;
+	}
 	
 //---  Helper Methods   -----------------------------------------------------------------------
 
