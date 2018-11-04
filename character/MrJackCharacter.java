@@ -106,6 +106,16 @@ public abstract class MrJackCharacter {
 		return tileIndex;
 	}
 	
+	/**
+	 * Getter method that requests the name of this MrJackCharacter object.
+	 * 
+	 * @return - Returns a String object representing the name associated to this MrJackCharacter object.
+	 */
+	
+	public String getName() {
+		return name;
+	}
+	
 //---  Setter Methods   -----------------------------------------------------------------------
 	
 	/**

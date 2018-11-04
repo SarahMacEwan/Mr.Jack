@@ -5,6 +5,7 @@ import java.io.*;
 import tile.Lantern;
 import java.util.HashSet;
 import character.MrJackCharacter;
+import java.util.Random;
 
 /**
  * Central point for running/processing the Mr. Jack Game
@@ -17,27 +18,49 @@ public class GameModel {
 
 //---  Constant Values   ----------------------------------------------------------------------
 	
+	/** int constant value representing the maximum number of MrJackCharacters that can be in a single game instance*/
 	private static final int NUMBER_ACTIVE_CHARACTERS = 4;
+	/** int constant value representing the number of lanterns that will be turned off*/
 	private static final int LANTERN_LIMIT = 4;
+	/** int constant value representing the number of turns in one game instance*/
 	private static final int NUMBER_OF_TURNS = 2;
+	/** String[] constant object representing the types of Players that can be active at any moment*/
 	private static final String[] PLAYERS = {"Detective", "Mr.Jack"};
 	
 //---  Instance Variables   -------------------------------------------------------------------
-	
-	Board board;
-	Detective detective;
-	MrJack mrJack;
-	Clock clock;
+
+	/** MrJackCharacter[] object representing all of the viable MrJackCharacters that can be used in this game*/
 	MrJackCharacter[] allMrJackCharacters;
-	MrJackCharacter[] usedMrJackCharacters;
+	/** MrJackCharacter[] object representing the subset of allMrJackCharacters that are being used in this instance of the game*/
 	MrJackCharacter[] activeMrJackCharacters;
-	int player;		//If 0, Detective turn, if 1, Mr. Jack turn
-	boolean gameOver;
-	
+	/** MrJackCharacter[] object representing the subset of activeMrJackCharacters that have already been used in this round*/
+	MrJackCharacter[] usedMrJackCharacters;
+	/** MrJackCharacter representing the chosen character that the active player is using for their turn*/
 	MrJackCharacter currentMrJackCharacter;
+	/** HashSet<<r>Integer> object representing which MrJackCharacters in a turn have already been used by index*/
 	HashSet<Integer> selectedMrJackCharacters;
+	/** Detective object representing one of the two players in this instance of the game*/
+	Detective detective;
+	/** MrJack object representing one of the two players in this instance of the game*/
+	MrJack mrJack;
+	/** Board object containing the set of Tiles that the game's characters are on; visual representation to the users*/
+	Board board;
+	/** Clock object that keeps track of the game's state via turn counter, also controlling the turning off of lanterns*/
+	Clock clock;
+	/** boolean instance variable representing whether or not the game has ended*/
+	boolean gameOver;
+	/** int value representing which player is the currently active player; who is controlling the currentMrJackCharacter?*/
+	int player;
 	
 //---  Constructors   -------------------------------------------------------------------------
+	
+	/**
+	 * Constructor for GameModel objects that is provided a file describing the game's board and
+	 * a list of potential Characters to use in an instance of the game.
+	 * 
+	 * @param structure - File object describing the nature of the game's board
+	 * @param potentialMrJackCharacters - List of MrJackCharacter objects to be used in the game.
+	 */
 	
 	public GameModel(File structure, MrJackCharacter ... potentialMrJackCharacters) {
 		board = deriveBoard(structure);
@@ -45,23 +68,47 @@ public class GameModel {
 	}
 	
 //---  Game Behaviors   -----------------------------------------------------------------------
+
+	/**
+	 * This method starts an instance of the Mr. Jack game, resetting/defaulting values
+	 * that require such between distinct instances of the game.
+	 * 
+	 */
 	
 	public void startGame() {
 		mrJack = new MrJack();
 		detective = new Detective();
 		player = 0;
-		clock = deriveClock(LANTERN_LIMIT);
+		clock = deriveClock();
 		usedMrJackCharacters = deriveMrJackCharacters(allMrJackCharacters);
 		gameOver = false;
 		selectedMrJackCharacters.clear();
 		currentMrJackCharacter = null;
+		for(MrJackCharacter mjc : allMrJackCharacters) {
+			mjc.setSuspect(true);
+			mjc.setLit(false);
+		}
 	}
+
+	/**
+	 * This method starts a turn in the current Mr. Jack game, getting the MrJackCharacters
+	 * to be used during this turn and resetting the tracker for which have been used so far.
+	 * 
+	 */
 	
 	public void startTurn() {
 		activeMrJackCharacters = characterSetPerTurn(activeMrJackCharacters);
 		selectedMrJackCharacters = new HashSet<Integer>();
 		currentMrJackCharacter = null;
 	}
+
+	/**
+	 * This method assigns the current MrJackCharacter that is being controlled by the active
+	 * Player, informing the caller whether or not the choice was valid.
+	 * 
+	 * @param choice - int value representing the index in viable MrJackCharacters that the user wants to control
+	 * @return - Returns a boolean value describing whether or not the user choice was legal
+	 */
 	
 	public boolean chooseMrJackCharacter(int choice) {
 		if(selectedMrJackCharacters.contains(choice))
@@ -71,16 +118,42 @@ public class GameModel {
 		return true;
 	}
 
+	/**
+	 * This method tentatively moves the currently selected MrJackCharacter to the specified
+	 * location by index in the Board's array of Tiles.
+	 * 
+	 * @param choice - int value designating the new Tile location of the active MrJackCharacter by index in the Board
+	 * @return - Returns a boolean value describing whether or not the chosen location was legal
+	 */
+	
 	public boolean moveMrJackCharacter(int choice) {			//Controller is told by the player whether moving or action
-		//move if legal, return false otherwise
+		
+		
+		
 		return false;
 	}
+
+	/**
+	 * This method tentatively performs the currently selected MrJackCharacter's special ability,
+	 * taking an array of int values that contains all the necessary information to use their ability.
+	 * 
+	 * @param choice - int[] object describing the necessary information to conduct the MrJackCharacter's ability
+	 * @return - Returns a boolean value describing whether the action was successful (viable) or not.
+	 */
 	
 	public boolean characterAction(int[] choice) {
 		//ask active character if can do action provided, respond appropriately
 		return false;
 	}
-		
+
+	/**
+	 * This method handles the case of the user accusing a character of being Mr. Jack,
+	 * returning the result of that accusation based on whether it was accurate or not.
+	 * 
+	 * @param choice - int value designating the Tile location on which the accused MrJackCharacter lies
+	 * @return - Returns a boolean value designating whether the accusation was correct or not.
+	 */
+	
 	public boolean accuseCharacter(int choice) {
 		MrJackCharacter accused = null;
 		for(MrJackCharacter mjc : usedMrJackCharacters) {
@@ -91,6 +164,14 @@ public class GameModel {
 		return detective.hasWonAccusation(accused);
 	}
 
+	/**
+	 * This method handles the ending of a turn, setting up for the next batch of MrJackCharacters
+	 * to be selected, iterating the turn counter, deriving which positions are 'lit' for deciding
+	 * who is suspected, and informing the caller of whether or not a victory condition has been met.
+	 * 
+	 * @return - Returns a boolean value describing whether or not the game has ended on this round.
+	 */
+	
 	public boolean endTurn() {
 		clock.iterateTurn();
 		activeMrJackCharacters = clock.getTurn() % 2 == 0 ? null : activeMrJackCharacters;	//and other stuff
@@ -108,11 +189,26 @@ public class GameModel {
 	}
 	
 //---  Getter Methods   -----------------------------------------------------------------------
+
+	/**
+	 * This method compresses the game's state to be sharable and decompressable by
+	 * a potential View that will display the Game by decoding the compressed version.
+	 * 
+	 * @return - Returns a String object containing the entire game in an encoded format.
+	 */
 	
 	public String outputGameState() {
 		
 		return null;
 	}
+
+	/**
+	 * This method informs the caller of who the current player of the game is; Mr. Jack or
+	 * the Detective, based on the current turn value and how many MrJackCharacters have been
+	 * used so far.
+	 * 
+	 * @return - Returns a String value containing the name of the active player.
+	 */
 	
 	public String getWhoIsPlayer() {
 		if(selectedMrJackCharacters.size() == 0 || selectedMrJackCharacters.size() == NUMBER_ACTIVE_CHARACTERS/2 - 1) {
@@ -122,39 +218,114 @@ public class GameModel {
 			return PLAYERS[(player + 1) % 2];
 		}
 	}
+
+	/**
+	 * This method informs the caller of how many integer values are required for
+	 * the current MrJackCharacter object to do their ability.
+	 * 
+	 * @return - Returns an int value describing how many integer values need to be provided to do an ability.
+	 */
 	
 	public int howManyValuesForAction() {
-		
-		return -1;
+		return currentMrJackCharacter.requiredValuesForAbility();
 	}
+
+	/**
+	 * This method informs the caller of whether the current turn has ended or not by requesting
+	 * how many Characters have been used so far.
+	 * 
+	 * @return - Returns a boolean value describing whether the current turn has ended or not.
+	 */
 	
 	public boolean roundOver() {
 		return (selectedMrJackCharacters.size() == NUMBER_ACTIVE_CHARACTERS/2);
 	}
 
-	public MrJackCharacter[] getCharacters(){return allMrJackCharacters;}
+	/**
+	 * This method provides the full list of potential MrJackCharacter objects that can
+	 * be used in this instance of the game.
+	 * 
+	 * @return - Returns a MrJackCharacter[] object containing all available MrJackCharacter objects.
+	 */
+	
+	public MrJackCharacter[] getCharacters(){
+		return allMrJackCharacters;
+	}
 
+	/**
+	 * This method provides the caller with the Board object used by this instance of the game.
+	 * 
+	 * @return - Returns a Board object containing information about the game's board
+	 */
+	
 	public Board getBoard(){
 		return board;
 	}
 	
 //---  Helper Methods   -----------------------------------------------------------------------
 
+	/**
+	 * This method converts a provided file object into the Board that the game will
+	 * be using for its operations. 
+	 * 
+	 * @param structure - File object describing the configuration of a Board object.
+	 * @return - Returns the generated Board object, composed of Tile objects.
+	 */
+	
 	private Board deriveBoard(File structure) {
 		String[] fileBoardInput = null;	//Parse the file to get this value
 		Board newBoard = new Board(fileBoardInput);
 		return newBoard;
 	}
+
+	/**
+	 * This method generates a new Clock object for a new instance of the Mr. Jack game,
+	 * being assigned a set of the Lantern Tiles and how many to turn off over the
+	 * duration of the game.
+	 * 
+	 * @return - Returns the generated Clock object to the caller.
+	 */
 	
-	private Clock deriveClock(int lanternLimit) {
-		Clock newClock = new Clock((Lantern[])board.getTiles('l'), lanternLimit);
+	private Clock deriveClock() {
+		Clock newClock = new Clock((Lantern[])board.getTiles('l'), LANTERN_LIMIT);
 		return newClock;
 	}
+
+	/**
+	 * This method derives a list of unused MrJackCharacters to use in this turn.
+	 * 
+	 * @param potential - MrJackCharacter[] object representing the list of already used MrJackCharacters for this turn.
+	 * @return - Returns a MrJackCharacter[] object containing the the MrJackCharacters to use in this turn.
+	 */
 	
 	private MrJackCharacter[] deriveMrJackCharacters(MrJackCharacter[] potential) {
-		MrJackCharacter[] newMrJackCharacters = null; 	//derive 
-		return newMrJackCharacters;
+		int maxSize = NUMBER_ACTIVE_CHARACTERS * 2 < potential.length ? NUMBER_ACTIVE_CHARACTERS * 2 : potential.length;
+		MrJackCharacter[] toUse = new MrJackCharacter[maxSize];
+		Random rand = new Random();
+		int index = 0;
+		
+		while(toUse[maxSize] == null) {
+			MrJackCharacter possible = potential[rand.nextInt(NUMBER_ACTIVE_CHARACTERS * 2)];
+			boolean present = false;
+			for(MrJackCharacter mjc : toUse) {
+				if(toUse != null && mjc.getName().equals(possible.getName())){
+					present = true;
+				}
+			}
+			if(!present) {
+				toUse[index++] = possible;
+			}
+		}
+		
+		return toUse;
 	}
+
+	/**
+	 * This method calculates whether each active MrJackCharacter is currently 'lit',
+	 * and compares that against the MrJack MrJackCharacter to decide whether or not
+	 * each MrJackCharacter remains as a suspect.
+	 * 
+	 */
 	
 	private void removeSuspects() {
 		boolean[] shadows = board.getLitTiles();
@@ -165,15 +336,40 @@ public class GameModel {
 		}
 	}
 	
-	private MrJackCharacter[] characterSetPerTurn(MrJackCharacter[] lastUsed) {
-		MrJackCharacter[] theseGuys = new MrJackCharacter[NUMBER_ACTIVE_CHARACTERS/2];
-		if(lastUsed == null) {
-			//get random 4 characters
+	/**
+	 * This method derives a list of unused MrJackCharacters to use in this turn.
+	 * 
+	 * @param potential - MrJackCharacter[] object representing the list of already used MrJackCharacters for this turn.
+	 * @return - Returns a MrJackCharacter[] object containing the the MrJackCharacters to use in this turn.
+	 */
+	
+	private MrJackCharacter[] characterSetPerTurn(MrJackCharacter[] potential) {
+		MrJackCharacter[] newMrJackCharacters = null; 	//derive 
+		int index = 0;
+		Random rand = new Random();
+		newMrJackCharacters = new MrJackCharacter[NUMBER_ACTIVE_CHARACTERS];
+		
+		while(newMrJackCharacters[NUMBER_ACTIVE_CHARACTERS - 1] == null) {
+			int ind = rand.nextInt(activeMrJackCharacters.length);
+			MrJackCharacter possible = activeMrJackCharacters[ind];
+			boolean result = true;
+			if(potential != null) {
+				for(MrJackCharacter mjc : potential)
+					if(mjc != null && possible.getName().equals(mjc.getName())) {
+						result = false;
+						break;
+					}
+			}
+			for(MrJackCharacter mjc : newMrJackCharacters) {
+				if(mjc != null && mjc.getName().equals(possible.getName())) {
+					result = false;
+					break;
+				}
+			}
+			if(result)
+				newMrJackCharacters[index++] = possible;
 		}
-		else {
-			//use other 4 characters not in lastUsed
-		}
-		return theseGuys;
+		return newMrJackCharacters;
 	}
 
 }
