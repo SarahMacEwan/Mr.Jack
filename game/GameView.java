@@ -33,7 +33,7 @@ public class GameView extends InteractFrame{
     private static final String BOARD_FRAME_PATH = "assets/UI/boardFrame2.png";
 
 	private final int REFRESH_RATE = 1000/15;
-	private final double ANGLE_START = -1* Math.PI/3.0;
+	private final double ANGLE_START = 2 * Math.PI / 3.0;
     
 //---  Instance Variables   -------------------------------------------------------------------
 
@@ -53,6 +53,8 @@ public class GameView extends InteractFrame{
     double height;
     
     DrawnTile[] tileDrawing;
+    int ref1;
+    int ref2;
     
 //---  Constructors   -------------------------------------------------------------------------
 	
@@ -108,13 +110,17 @@ public class GameView extends InteractFrame{
 				if(curr[2 + j].equals("false") || curr[2 + j].equals("true"))
 					continue;
 				int refInd = Integer.parseInt(curr[2 + j]);
+				if(i == 0 && j == 0) {
+					ref1 = index;
+					ref2 = refInd;
+				}
 				double angle = 2 * Math.PI * ((double)j / (double)numNeigh);
 				if(reference.get(refInd) == null) {
-					DrawnTile newTile = new DrawnTile(nextTile.getX() + changeInX(angle, 10), nextTile.getY() + changeInY(angle, 100), null, refInd);
+					DrawnTile newTile = new DrawnTile(nextTile.getX() - changeInX(angle, 1), nextTile.getY() - changeInY(angle, 1), null, refInd);
 					reference.put(refInd, newTile);
 				}
-				double x = nextTile.getX() + changeInX(angle, 10);
-				double y = nextTile.getY() + changeInY(angle, 10);
+				double x = nextTile.getX() - changeInX(angle, 1);
+				double y = nextTile.getY() - changeInY(angle, 1);
 				reference.get(refInd).setX(x);
 				reference.get(refInd).setY(y);
 				minX = x < minX ? x : minX;
@@ -132,8 +138,8 @@ public class GameView extends InteractFrame{
 		double changeY = (minY + maxY) / 2 - tileDrawing[0].getY();
 		
 		for(DrawnTile dT : tileDrawing) {
-			dT.setX(BOARD_CENTER_X + (dT.getX() + changeX) * SCREEN_WIDTH * 5 / 6 / width);
-			dT.setY(BOARD_CENTER_Y + (dT.getY() + changeY)  * SCREEN_WIDTH * 4 / 5/ height );
+			dT.setX((dT.getX() + changeX));
+			dT.setY((dT.getY() + changeY));
 		}
 		
 		//TODO: Characters
@@ -200,11 +206,14 @@ public class GameView extends InteractFrame{
 	private void drawBoard(Graphics g) {
 		addPicScaledCorner(0, 0, BOARD_FRAME_PATH, g, 4);
 		int ind = 0;
+
+		int size = 150;
 		
 		for(DrawnTile dT : tileDrawing) {
 			if(dT == null)
 				continue;
-			drawTile(g, (int)dT.getX(), (int)dT.getY(), 50, dT.getType(), ind++);
+			drawTile(g, (int)(BOARD_CENTER_X + dT.getX() * size), (int)(BOARD_CENTER_Y + dT.getY() * size), size, dT.getType(), ind++);
+			addOwnTextScaled((int)(BOARD_CENTER_X + dT.getX() * size), (int)(BOARD_CENTER_Y + dT.getY() * size), dT.getIndex() + "", g, 2);
 		}
 		
 		
@@ -234,12 +243,12 @@ public class GameView extends InteractFrame{
 		addButton(x, y, hyp, hyp, "", null, g, tile);
 	}
 		
-	private int changeInX(double angle, int hyp) {
-		return (int)(2 * hyp * (angle + ANGLE_START > Math.PI ? Math.cos(angle + ANGLE_START) : Math.sin(angle + ANGLE_START)));
+	private double changeInX(double angle, int hyp) {
+		return (2.0 * hyp * Math.sin(angle + ANGLE_START));
 	}
 	
-	private int changeInY(double angle, int hyp) {
-		return (int)(2 * hyp * (angle + ANGLE_START <= Math.PI ? Math.cos(angle + ANGLE_START) : Math.sin(angle + ANGLE_START)));
+	private double changeInY(double angle, int hyp) {
+		return (2.0 * hyp * Math.cos(angle + ANGLE_START));
 	}
 	
 }
