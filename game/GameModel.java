@@ -206,11 +206,17 @@ public class GameModel {
 	 */
 	
 	public String outputGameState() {
-		String out = board.convertToOutboundFormat();
-		for(MrJackCharacter mjc : activeMrJackCharacters) {
+		String out = board.convertToOutboundFormat();	//Board tiles
+		
+		for(MrJackCharacter mjc : activeMrJackCharacters) {	//Character locations
 			out += mjc.convertToOutboundFormat();
 		}
-		out += clock.convertToOutboundFormat();
+		
+		out += clock.convertToOutboundFormat();		//Clock info
+		
+		out += player + "\n";						//Current Player
+		
+													//Active character, reach, ability
 		return out;
 	}
 

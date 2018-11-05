@@ -32,6 +32,7 @@ public class GameView extends InteractFrame{
     private static final String SIDE_FRAME_PATH = "assets/UI/sideBorder1.png";
     private static final String BOTTOM_FRAME_PATH = "assets/UI/bottomBar1.png";
     private static final String BOARD_FRAME_PATH = "assets/UI/boardFrame2.png";
+    private static final String CLOCK_FACE_PATH = "assets/UI/clockFace1.png";
 
 	private final int REFRESH_RATE = 1000/15;
 	private final double ANGLE_START = 2 * Math.PI / 3.0;
@@ -54,6 +55,8 @@ public class GameView extends InteractFrame{
     double height;
     
     DrawnTile[] tileDrawing;
+    
+    int[] reachable;
     
 //---  Constructors   -------------------------------------------------------------------------
 	
@@ -139,7 +142,11 @@ public class GameView extends InteractFrame{
 			dT.setY((dT.getY() - changeY));
 		}
 		
+		System.out.println(code);
+		
 		//TODO: Characters
+		
+		//TODO: Reachable
 		
 		sc.close();
 	}
@@ -238,6 +245,9 @@ public class GameView extends InteractFrame{
 	
 	private void drawClock(Graphics g) {
 		addPicScaledCorner(SCREEN_WIDTH*5/6, 0, SIDE_FRAME_PATH, g, 4);
+		addPicScaled(SCREEN_WIDTH*11/12, SCREEN_HEIGHT * 1/10, CLOCK_FACE_PATH, g, 4);
+		addOwnTextScaled(SCREEN_WIDTH*11/12, SCREEN_HEIGHT / 10 + TEXT_HEIGHT * 2, turnNumber + "", g, 3);
+		
 	}
 	
 	private void drawInteraction(Graphics g) {
