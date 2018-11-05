@@ -10,6 +10,11 @@ package tile;
  */
 
 public class Exit extends Tile{
+	
+//---  Constant Values   ----------------------------------------------------------------------
+	
+	/** constant char value representing the identity/type of this Tile subclass by a single character*/
+	private static final char IDENTITY = 'e';
 
 //---  Instance Variables   -------------------------------------------------------------------
 	
@@ -26,7 +31,7 @@ public class Exit extends Tile{
 	 */
 	
 	public Exit(int loca) {
-		identity = 'e';
+		identity = IDENTITY;
 		shareable = true;
 		blocked = false;
 		location = loca;

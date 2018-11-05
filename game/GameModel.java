@@ -3,6 +3,8 @@ package game;
 import player.*;
 import java.io.*;
 import tile.Lantern;
+import java.util.Scanner;
+import java.util.ArrayList;
 import java.util.HashSet;
 import character.MrJackCharacter;
 import java.util.Random;
@@ -128,6 +130,9 @@ public class GameModel {
 	
 	public boolean moveMrJackCharacter(int choice) {
 		boolean[] reachable = board.getLegalMovement(currentMrJackCharacter);
+		if(reachable[choice]) {
+			currentMrJackCharacter.setLocation(choice);
+		}
 		return reachable[choice];
 	}
 
@@ -198,7 +203,10 @@ public class GameModel {
 	 */
 	
 	public String outputGameState() {
-		
+		String out = board.convertToOutboundFormat();
+		for(MrJackCharacter mjc : usedMrJackCharacters) {
+			out += mjc.convertToOutboundFormat();
+		}
 		return null;
 	}
 
@@ -262,6 +270,11 @@ public class GameModel {
 		return board;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
+	
 	public int[] getCharacterLocations() {
 		int[] out = new int[activeMrJackCharacters.length];
 		int ind = 0;
@@ -282,9 +295,22 @@ public class GameModel {
 	 */
 	
 	private Board deriveBoard(File structure) {
-		String[] fileBoardInput = null;	//Parse the file to get this value
-		Board newBoard = new Board(fileBoardInput);
-		return newBoard;
+		try {
+			Scanner sc = new Scanner(structure);
+			ArrayList<String> input = new ArrayList<String>();
+			while(sc.hasNextLine()) {
+				input.add(sc.nextLine());
+			}
+			String[] fileBoardInput = input.toArray(new String[input.size()]);	//Parse the file to get this value
+			Board newBoard = new Board(fileBoardInput);
+			sc.close();
+			return newBoard;
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("File exception during Board Construction");
+			return null;
+		}
 	}
 
 	/**

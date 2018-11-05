@@ -73,6 +73,17 @@ public abstract class MrJackCharacter {
 	
 	public abstract void deriveFromModel(GameModel model);
 	
+	/**
+	 * 
+	 * Format: [Name] [Location] [Is lit?] [Is Suspected?]
+	 * 
+	 * @return
+	 */
+	
+	public String convertToOutboundFormat() {
+		return name + " " + tileIndex + " " + (isLit ? "1" : "0") + " " + (isSuspect ? "1" : "0");
+	}
+	
 //---  Getter Methods   -----------------------------------------------------------------------
 
 	/**

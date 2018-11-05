@@ -12,6 +12,11 @@ package tile;
  */
 
 public class Lantern extends Tile{
+	
+//---  Constant Values   ----------------------------------------------------------------------
+	
+	/** constant char value representing the identity/type of this Tile subclass by a single character*/
+	private static final char IDENTITY = 'l';
 
 //---  Instance Variables   -------------------------------------------------------------------
 	
@@ -28,7 +33,7 @@ public class Lantern extends Tile{
 	 */
 	
 	public Lantern(int loc) {
-		identity = 'l';
+		identity = IDENTITY;
 		shareable = false;
 		isOn = false;
 		location = loc;
