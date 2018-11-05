@@ -35,7 +35,7 @@ public class Lantern extends Tile{
 	public Lantern(int loc) {
 		identity = IDENTITY;
 		shareable = false;
-		isOn = false;
+		isOn = true;
 		location = loc;
 	}
 

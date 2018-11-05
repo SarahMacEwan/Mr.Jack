@@ -59,6 +59,9 @@ public class Board {
 	public boolean[] getLegalMovement(MrJackCharacter mover) {
 		boolean[] reachable = new boolean[tiles.length];
 		
+		if(mover == null)
+			return reachable;
+		
 		HashMap<Integer, Integer> dist = new HashMap<Integer, Integer>();
 		LinkedList<Tile> queue = new LinkedList<Tile>();
 		int maxDist = mover.getDistance();
@@ -150,10 +153,11 @@ public class Board {
 	public boolean[] getLitTiles(int[] charLoc) {
 		boolean[] whoIsLit = new boolean[tiles.length];
 		
-		for(Lantern t : (Lantern[])getTiles('l')) {
-			if(t.getLight()) {
+		for(Tile t : getTiles('l')) {
+			if(((Lantern)t).getLight()) {
 				for(int i : t.getNeighbors()) {
-					whoIsLit[i] = true;
+					if(i != -1)
+						whoIsLit[i] = true;
 				}
 			}
 		}

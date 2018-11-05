@@ -6,6 +6,7 @@ import java.util.Timer;
 import visualmechanics.TimerRefresh;
 import visualmechanics.InteractFrame;
 import java.util.Scanner;
+import java.util.Arrays;
 import java.util.HashMap;
 
 
@@ -35,6 +36,8 @@ public class GameView extends InteractFrame{
     private static final String CLOCK_FACE_PATH = "assets/UI/clockFace1.png";
     private static final String BANNER_PATH_COPPER = "assets/UI/bannerCopper.png";
     private static final String BANNER_PATH_GOLD = "assets/UI/bannerGold.png";
+    private static final String LIT_TILE_IMAGE_PATH = "assets/UI/litTile1.png";
+    private static final String REACHABLE_TILE_IMAGE_PATH = "assets/UI/reachableTile1.png ";
     
     private static final String[] PLAYER_TITLES = {"Detective", "Mr. Jack"};
 
@@ -46,8 +49,6 @@ public class GameView extends InteractFrame{
     Timer timer;
     String boardState;
     int gameState;
-    
-    int cycle;
     
     int turnNumber;
     int currentPlayer;
@@ -62,9 +63,12 @@ public class GameView extends InteractFrame{
     
     DrawnTile[] tileDrawing;
     
-    int[] reachable;
+    boolean[] reachable;
+    boolean[] lit;
+    boolean[] suspect;
     String[] chosenCharacters;
     String[] usedCharacters;
+    String currCharacter;
     
 //---  Constructors   -------------------------------------------------------------------------
 	
@@ -79,6 +83,7 @@ public class GameView extends InteractFrame{
 		tileDrawing = new DrawnTile[0];
 		chosenCharacters = new String[0];
 		usedCharacters = new String[0];
+		currCharacter = "";
 	}
 
 //---  Operations   ---------------------------------------------------------------------------
@@ -105,6 +110,8 @@ public class GameView extends InteractFrame{
 		minY = 10;
 		maxX = -10;
 		maxY = -10;
+		
+		//-- Tiles  -------------------------------------------
 		
 		for(int i = 0; i < numTile; i++) {		//[index #] [identity char] [neighbors # # # # # #] [optional: state]
 			String curr[] = sc.nextLine().split(" ");
@@ -152,7 +159,7 @@ public class GameView extends InteractFrame{
 			dT.setY((dT.getY() - changeY));
 		}
 		
-		//TODO: Characters
+		//-- Characters  --------------------------------------
 		
 		int numChar = Integer.parseInt(sc.nextLine());	//[Name] [Location] [Is lit?] [Is Suspected?]
 		chosenCharacters = new String[numChar];
@@ -160,28 +167,59 @@ public class GameView extends InteractFrame{
 			chosenCharacters[i] = sc.nextLine();
 		}
 		
+		//-- Clock - Turn Counter  ----------------------------
 		
-		//TODO: Clock
 		turnNumber = Integer.parseInt(sc.nextLine());
 		
-		//TODO: Current Player
+		//-- Current Player  ----------------------------------
+		
 		currentPlayer = Integer.parseInt(sc.nextLine());
 		
-		//TODO: Selected Characters
+		//-- Characters used so far ---------------------------
+		
 		usedCharacters = new String[Integer.parseInt(sc.nextLine())];
 		
 		for(int i = 0; i < usedCharacters.length; i++) {
 			usedCharacters[i] = sc.nextLine();
 		}
 		
-		//TODO: Active Character, Reachable
+		//-- Currently Selected Character  --------------------
+		
+		currCharacter = sc.nextLine();
+		
+		//-- Reachable Tiles  ---------------------------------
+		
+		String[] inBool = sc.nextLine().split(" ");
+
+		reachable = new boolean[inBool.length];
+		
+		for(int i = 0; i < inBool.length; i++) {
+			reachable[i] = inBool[i].equals("1");
+		}
+		
+		//-- Lit Tiles  ---------------------------------------
+		
+		inBool = sc.nextLine().split(" ");
+		
+		lit = new boolean[inBool.length];
+		
+		for(int i = 0; i < inBool.length; i++) {
+			lit[i] = inBool[i].equals("1");
+		}
+
+		//-- Suspect Characters  ------------------------------
+		
+		inBool = sc.nextLine().split(" ");
+		
+		suspect = new boolean[inBool.length];
+		
+		for(int i = 0; i < inBool.length; i++)
+			suspect[i] = inBool[i].equals("1");
 		
 		sc.close();
 	}
 	
 	public void paintComponent(Graphics g) {
-		cycle++;
-		cycle %= 90;
 		switch(gameState) {
 			case 0: drawMenu(g);
 					break;
@@ -256,13 +294,10 @@ public class GameView extends InteractFrame{
 			if(dT == null)
 				continue;
 			drawTile(g, (int)(BOARD_CENTER_X + dT.getX() * size), (int)(BOARD_CENTER_Y + dT.getY() * size), size, dT.getType(), ind++);
-			if(cycle < 90) {
-				addOwnTextScaled((int)(BOARD_CENTER_X + dT.getX() * size), (int)(BOARD_CENTER_Y + dT.getY() * size) - TEXT_HEIGHT, dT.getType() + ":" + dT.getIndex(), g, 2);
-				for(int i = 0; i < chosenCharacters.length; i++) {
-					String[] in = chosenCharacters[i].split(" ");
-					int inde = Integer.parseInt(in[1]);
-					addOwnTextScaled((int)(BOARD_CENTER_X + tileDrawing[inde].getX() * size), (int)(BOARD_CENTER_Y + tileDrawing[inde].getY() * size) + TEXT_HEIGHT * 2, in[0], g, 2);
-				}
+			for(int i = 0; i < chosenCharacters.length; i++) {
+				String[] in = chosenCharacters[i].split(" ");
+				int inde = Integer.parseInt(in[1]);
+				addOwnTextScaled((int)(BOARD_CENTER_X + tileDrawing[inde].getX() * size), (int)(BOARD_CENTER_Y + tileDrawing[inde].getY() * size) + TEXT_HEIGHT * 2, in[0], g, 2);
 			}
 		}
 		
@@ -302,8 +337,13 @@ public class GameView extends InteractFrame{
 	}
 	
 	private void drawTile(Graphics g, int x, int y, int hyp, String type, int tile) {
-		drawHexagon(x, y, hyp, g);
-		addButton(x, y, (int)(1.3 * hyp), (int)(1.3 * hyp), "", null, g, tile);
+		drawHexagon(x, y, hyp, g, Color.black);				//Border
+		addButton(x, y, (int)(1.3 * hyp), (int)(1.3 * hyp), "", null, g, tile);		//Clickable
+		addOwnTextScaled(x, y - TEXT_HEIGHT, type, g, 2);		//Type of Tile
+		if(lit[tile])											//Is Tile lit
+			addPicScaled(x - 2 * TEXT_HEIGHT, y + 2 * TEXT_HEIGHT, LIT_TILE_IMAGE_PATH, g, 2);
+		if(reachable[tile])										//Is Tile reachable
+			addPicScaled(x + 2 * TEXT_HEIGHT, y + 2 * TEXT_HEIGHT, REACHABLE_TILE_IMAGE_PATH, g, 2);
 	}
 		
 	private double changeInX(double angle, double hyp) {
@@ -315,6 +355,3 @@ public class GameView extends InteractFrame{
 	}
 	
 }
-
-
-

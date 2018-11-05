@@ -174,7 +174,9 @@ public class InteractFrame extends JPanel{
 		//Clicking anywhere else should de-select
 	}
 
-	public void drawHexagon(int x, int y, int distance, Graphics g) {
+	public void drawHexagon(int x, int y, int distance, Graphics g, Color col) {
+		Color maintain = g.getColor();
+		g.setColor(col);
 		double angleStart = -1 * Math.PI + Math.PI / 6.0;
 		for(int i = 0; i < 6; i++) {
 			int x1 = x + (int)(distance * Math.sin(angleStart + (i / (double)3) * Math.PI));
@@ -183,6 +185,7 @@ public class InteractFrame extends JPanel{
 			int y2 = y + (int)(distance * Math.cos(angleStart + ((i + 1) / (double)3) * Math.PI));
 			g.drawLine(x1, y1, x2, y2);
 		}
-		
+		g.setColor(maintain);
 	}
+
 }

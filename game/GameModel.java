@@ -5,6 +5,7 @@ import java.io.*;
 import tile.Lantern;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import character.MrJackCharacter;
 import java.util.Random;
@@ -214,7 +215,12 @@ public class GameModel {
 	 */
 	
 	public String outputGameState() {
+		
+		//-- Tiles  -------------------------------------------
+		
 		String out = board.convertToOutboundFormat();	//Board tiles
+		
+		//-- MrJackCharacters  --------------------------------
 		
 		out += activeMrJackCharacters.length + "\n";
 		
@@ -222,9 +228,15 @@ public class GameModel {
 			out += mjc.convertToOutboundFormat();
 		}
 		
+		//-- Clock Info  --------------------------------------
+		
 		out += clock.convertToOutboundFormat();		//Clock info
 		
+		//-- Current Player  ----------------------------------
+		
 		out += player + "\n";						//Current Player
+		
+		//-- Characters used so far  --------------------------
 		
 		out += usedMrJackCharacters.length + "\n";
 		
@@ -238,9 +250,30 @@ public class GameModel {
 			}
 		}
 		
-		out += "\n";
-													//Active character, reach, ability
+		//-- Reachable Tiles  ---------------------------------
 		
+													//Active character, reach, ability
+		boolean[] reach = board.getLegalMovement(currentMrJackCharacter);
+		
+		if(currentMrJackCharacter != null)
+			out += currentMrJackCharacter.getName() + "\n";
+		else
+			out += "null\n";
+		
+		for(int i = 0; i < reach.length; i++)
+			out += (reach[i] ? 1 : 0) + (i + 1 == reach.length ? "\n" : " ");
+		
+		//-- Lit Tiles  ---------------------------------------
+		
+		boolean[] litten = board.getLitTiles(getCharacterLocations());
+		for(int i = 0; i < litten.length; i++)
+			out += (litten[i] == true ? "1" : "0") + (i + 1 == litten.length ? "\n" : " ");
+		
+	
+		//-- Suspected Characters  ----------------------------
+		
+		for(int i = 0; i < activeMrJackCharacters.length; i++)
+			out += (activeMrJackCharacters[i].getSuspect() == true ? "1" : "0") + (i + 1 == activeMrJackCharacters.length ? "\n" : " ");
 		
 		return out;
 	}
