@@ -10,6 +10,11 @@ package tile;
  */
 
 public class Building extends Tile{
+	
+//---  Constant Values   ----------------------------------------------------------------------
+	
+	/** constant char value representing the identity/type of this Tile subclass by a single character*/
+	private static final char IDENTITY = 'b';
 
 //---  Constructors   -------------------------------------------------------------------------
 	
@@ -21,7 +26,7 @@ public class Building extends Tile{
 	 */
 	
 	public Building(int loc) {
-		identity = 'b';
+		identity = IDENTITY;
 		shareable = false;
 		location = loc;
 	}

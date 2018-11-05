@@ -73,6 +73,17 @@ public abstract class MrJackCharacter {
 	
 	public abstract void deriveFromModel(GameModel model);
 	
+	/**
+	 * 
+	 * Format: [Name] [Location] [Is lit?] [Is Suspected?]
+	 * 
+	 * @return
+	 */
+	
+	public String convertToOutboundFormat() {
+		return name + " " + tileIndex + " " + (isLit ? "1" : "0") + " " + (isSuspect ? "1" : "0");
+	}
+	
 //---  Getter Methods   -----------------------------------------------------------------------
 
 	/**
@@ -104,6 +115,25 @@ public abstract class MrJackCharacter {
 	
 	public int getLocation() {
 		return tileIndex;
+	}
+	
+	/**
+	 * Getter method that requests the name of this MrJackCharacter object.
+	 * 
+	 * @return - Returns a String object representing the name associated to this MrJackCharacter object.
+	 */
+	
+	public String getName() {
+		return name;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	
+	public int getDistance() {
+		return numMoves;
 	}
 	
 //---  Setter Methods   -----------------------------------------------------------------------

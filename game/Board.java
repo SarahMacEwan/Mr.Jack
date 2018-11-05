@@ -1,6 +1,14 @@
 package game;
 
 import tile.Tile;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import character.MrJackCharacter;
+import java.util.HashMap;
+import tile.Lantern;
+import tile.Manhole;
+import tile.Exit;
+import tile.Building;
 
 /**
  * This class models the Board that the Players manipulate for the Mr. Jack game.
@@ -14,10 +22,14 @@ import tile.Tile;
 
 public class Board {
 	
+//---  Constant Values   ----------------------------------------------------------------------
+	
+	private static final char[] IDENTITIES = {'b', 'e', 'l', 'm'};
+	
 //---  Instance Variables   -------------------------------------------------------------------
 
 	/** Tile[] object containing a list of Tile objects representing the Mr. Jack game's board*/
-	Tile[] start;
+	Tile[] tiles;
 	
 //---  Constructors   -------------------------------------------------------------------------
 	
@@ -29,7 +41,65 @@ public class Board {
 	 */
 	
 	public Board(String[] boardDesign) {
-		interpretInput(boardDesign[0]);
+		tiles = new Tile[Integer.parseInt(boardDesign[0].split(" ")[0])];
+		for(int i = 1; i < boardDesign.length; i++)
+			tiles[i - 1] = interpretInput(boardDesign[i]);
+	}
+	
+//---  Operations   ---------------------------------------------------------------------------
+	
+	/**
+	 * 
+	 * 
+	 * @param mover
+	 * @return
+	 */
+	
+	public boolean[] getLegalMovement(MrJackCharacter mover) {
+		boolean[] reachable = new boolean[tiles.length];
+		
+		HashMap<Integer, Integer> dist = new HashMap<Integer, Integer>();
+		LinkedList<Tile> queue = new LinkedList<Tile>();
+		int maxDist = mover.getDistance();
+		queue.add(tiles[mover.getLocation()]);
+		dist.put(mover.getLocation(), 0);
+		reachable[mover.getLocation()] = false;
+
+		while(!queue.isEmpty()) {
+			Tile top = queue.poll();
+			
+			for(int index : top.getNeighbors()) {
+				if(dist.get(index) != null) {
+					dist.put(index, dist.get(top.getLocation() + 1));
+					queue.add(tiles[index]);
+					reachable[index] = dist.get(index) <= maxDist;
+				}
+			}	
+		}
+		
+		return reachable;
+	}
+	
+	public String convertToOutboundFormat() {
+		String out = "";
+		int loc = 0;
+		for(Tile t : tiles) {
+			out += (loc++);
+			for(int i : t.getNeighbors()) {
+				out += " " + i;
+			}
+			out += "\n";
+		}
+		
+		for(char c : IDENTITIES) {
+			out += c + "\n";
+			for(int i = 0; i < tiles.length; i++) {
+				if(tiles[i].getIdentity() == c)
+					out += (i) + "\n";
+			}
+		}
+		
+		return out;
 	}
 	
 //---  Getter Methods   -----------------------------------------------------------------------
@@ -41,8 +111,18 @@ public class Board {
 	 */
 	
 	public Tile[] getTiles(char key) {
+		ArrayList<Tile> matchTiles = new ArrayList<Tile>();
+		for(Tile t : tiles) {
+			if(t.getIdentity() == key) {
+				matchTiles.add(t);
+			}
+		}
+		Tile[] out = new Tile[matchTiles.size()];
+		for(int i = 0; i < matchTiles.size(); i++) {
+			out[i] = matchTiles.get(i);
+		}
 		
-		return null;
+		return out;
 	}
 
 	/**
@@ -52,7 +132,7 @@ public class Board {
 	 */
 	
 	public char getTileIdentity(int index) {
-		return start[index].getIdentity();
+		return tiles[index].getIdentity();
 	}
 
 	/**
@@ -61,24 +141,85 @@ public class Board {
 	 * @return
 	 */
 	
-	public boolean[] getLitTiles() {
-		boolean[] whoIsLit = new boolean[start.length];
+	public boolean[] getLitTiles(int[] charLoc) {
+		boolean[] whoIsLit = new boolean[tiles.length];
 		
+		for(Lantern t : (Lantern[])getTiles('l')) {
+			if(t.getLight()) {
+				for(int i : t.getNeighbors()) {
+					whoIsLit[i] = true;
+				}
+			}
+		}
+		
+		for(int loc : charLoc) {
+			for(int adj : tiles[loc].getNeighbors()) {
+				for(int locTwo : charLoc) {
+					if(locTwo == adj) {
+						whoIsLit[loc] = true;
+						whoIsLit[locTwo] = true;
+					}
+				}
+			}
+			
+		}
 		
 		return whoIsLit;
 	}
 
+	/**
+	 * 
+	 * @param indexes
+	 * @return
+	 */
+	
+	public Tile[] getTiles(int[] indexes) {
+		Tile[] out = new Tile[indexes.length];
+		for(int i = 0; i < indexes.length; i++) {
+			out[i] = tiles[indexes[i]];
+		}
+		return out;
+	}
+	
 //---  Helper Methods   ---------------------------------------------------------------------------
 	
 	/**
 	 * 
+	 * Input Format: [#] [char] [# # # # # #]
 	 * 
 	 * @param in
 	 * @return
 	 */
 	
 	private Tile interpretInput(String in) {
-		return null;
+		String[] detes = in.split(" ");
+		
+		int[] neighbors = new int[detes.length - 2];
+		for(int i = 2; i < detes.length; i++) {
+			neighbors[i-2] = Integer.parseInt(detes[i]);
+		}
+		
+		switch(detes[1]) {
+			case "l":
+				Lantern lant = new Lantern(Integer.parseInt(detes[0]));
+				lant.assignNeighbors(neighbors);
+				return lant;
+			case "m":
+				Manhole man = new Manhole(Integer.parseInt(detes[0]));
+				man.assignNeighbors(neighbors);
+				return man;
+			case "e":
+				Exit exi = new Exit(Integer.parseInt(detes[0]));
+				exi.assignNeighbors(neighbors);
+				return exi;
+			case "b":
+				Building build = new Building(Integer.parseInt(detes[0]));
+				build.assignNeighbors(neighbors);
+				return build;
+			default:
+				System.out.println("Invalid entry for this kind of Board object");
+				return null;
+		}
 	}
 	
 }

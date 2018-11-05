@@ -12,6 +12,11 @@ package tile;
  */
 
 public class Manhole extends Tile{
+	
+//---  Constant Values   ----------------------------------------------------------------------
+	
+	/** constant char value representing the identity/type of this Tile subclass by a single character*/
+	private static final char IDENTITY = 'm';
 
 //---  Instance Variables   -------------------------------------------------------------------
 	
@@ -28,7 +33,7 @@ public class Manhole extends Tile{
 	 */
 	
 	public Manhole(int loc) {
-		identity = 'm';
+		identity =  IDENTITY;
 		shareable = true;
 		covered = false;
 		location = loc;
