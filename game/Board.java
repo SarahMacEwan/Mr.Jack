@@ -89,7 +89,7 @@ public class Board {
 	 */
 	
 	public String convertToOutboundFormat() {
-		String out = "";
+		String out = tiles.length + " " + tiles[0].getNeighbors().length + " " + "\n";
 		int loc = 0;
 		for(Tile t : tiles) {
 			out += (loc++) + " " + t.getIdentity();
@@ -103,14 +103,6 @@ public class Board {
 				default: break;
 			}
 			out += "\n";
-		}
-		
-		for(char c : IDENTITIES) {
-			out += c + "\n";
-			for(int i = 0; i < tiles.length; i++) {
-				if(tiles[i].getIdentity() == c)
-					out += (i) + "\n";
-			}
 		}
 		
 		return out;

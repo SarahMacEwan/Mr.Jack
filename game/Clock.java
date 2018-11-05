@@ -1,5 +1,6 @@
 package game;
 
+import tile.Tile;
 import tile.Lantern;
 
 /**
@@ -17,8 +18,8 @@ public class Clock {
 
 //---  Instance Variables   -------------------------------------------------------------------
 	
-	/** Lantern[] object containing references to all Lantern objects in the Mr. Jack game*/
-	Lantern[] lanterns;
+	/** Tile[] object containing references to all Lantern objects in the Mr. Jack game*/
+	Tile[] lanterns;
 	/** int value representing which turn the Mr. Jack game is currently in*/
 	int turnValue;
 	/** int value representing the maximum number of lanterns that should be turned off by the progression of turns*/
@@ -34,7 +35,7 @@ public class Clock {
 	 * @param lanternLimit - int value representing the number of Lanterns to turn off as the game progresses.
 	 */
 	
-	public Clock(Lantern[] givenLanterns, int lanternLimit) {
+	public Clock(Tile[] givenLanterns, int lanternLimit) {
 		lanterns = givenLanterns;
 		turnValue = 0;
 		maxLanternsOff = lanternLimit;
@@ -50,6 +51,10 @@ public class Clock {
 	public void iterateTurn() {
 		turnValue++;
 		manageLanterns();
+	}
+	
+	public String convertToOutboundFormat() {
+		return turnValue + "\n";
 	}
 	
 //---  Getter Methods   -----------------------------------------------------------------------
@@ -74,7 +79,7 @@ public class Clock {
 	
 	private void manageLanterns() {
 		if(turnValue <= maxLanternsOff) {
-			lanterns[turnValue].setLight(false);
+			((Lantern)(lanterns[turnValue])).setLight(false);
 		}
 	}
 

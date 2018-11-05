@@ -20,8 +20,8 @@ public class GameController {
 														 new JohnSmith(),
 														 new MissStealthy(),
 														 new SirWilliamGull()};
-    private static final int SCREEN_WIDTH = 1200;
-    private static final int SCREEN_HEIGHT = 800;
+    private static final int SCREEN_WIDTH = 1222;
+    private static final int SCREEN_HEIGHT = 854;
 	
 //---  Instance Variables   -------------------------------------------------------------------
 	
@@ -42,7 +42,8 @@ public class GameController {
 //---  Operations   ---------------------------------------------------------------------------
 
     public void startMrJack() {
-    	
+    	theGame.startGame();
+    	updateView();
     }
     
     public void updateView(){

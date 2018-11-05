@@ -7,7 +7,7 @@ public class MaximalTesting {
 	
 	public static void main(String[] args) {
 		GameController gam = new GameController(new File(MAP_1));
-		
+		gam.startMrJack();
 	}
 	
 }

@@ -17,9 +17,7 @@ public class MissStealthy extends MrJackCharacter{
 	private static final int NUM_MOVES = 4;
 
 // --- Instance Variables ---------------------------------------------------------------------
-private ArrayList<Building> relevantTiles;
-
-
+	
 //---  Constructors   -------------------------------------------------------------------------
 	
 	/**
@@ -55,12 +53,7 @@ private ArrayList<Building> relevantTiles;
 
 	@Override
 	public void deriveFromModel(GameModel model) {
-		//Find all building tiles
-		Board gameBoard = model.getBoard();
-		Tile[] buidlings = gameBoard.getTiles('b');
-		for(Tile building: buidlings){
-			relevantTiles.add((Building)building);
-		}
+		
 	}
 	
 //---  Ability Queries   ----------------------------------------------------------------------

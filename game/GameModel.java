@@ -67,6 +67,7 @@ public class GameModel {
 	public GameModel(File structure, MrJackCharacter ... potentialMrJackCharacters) {
 		board = deriveBoard(structure);
 		allMrJackCharacters = potentialMrJackCharacters;
+		selectedMrJackCharacters = new HashSet<Integer>();
 	}
 	
 //---  Game Behaviors   -----------------------------------------------------------------------
@@ -86,6 +87,7 @@ public class GameModel {
 		gameOver = false;
 		selectedMrJackCharacters.clear();
 		currentMrJackCharacter = null;
+		activeMrJackCharacters = new MrJackCharacter[0];
 		for(MrJackCharacter mjc : allMrJackCharacters) {
 			mjc.setSuspect(true);
 			mjc.setLit(false);
@@ -120,7 +122,6 @@ public class GameModel {
 		selectedMrJackCharacters.add(choice);
 		return true;
 	}
-
 
 	/**
 	 * This method tentatively moves the currently selected MrJackCharacter to the specified
@@ -206,9 +207,10 @@ public class GameModel {
 	
 	public String outputGameState() {
 		String out = board.convertToOutboundFormat();
-		for(MrJackCharacter mjc : usedMrJackCharacters) {
+		for(MrJackCharacter mjc : activeMrJackCharacters) {
 			out += mjc.convertToOutboundFormat();
 		}
+		out += clock.convertToOutboundFormat();
 		return out;
 	}
 
@@ -324,7 +326,7 @@ public class GameModel {
 	 */
 	
 	private Clock deriveClock() {
-		Clock newClock = new Clock((Lantern[])board.getTiles('l'), LANTERN_LIMIT);
+		Clock newClock = new Clock(board.getTiles('l'), LANTERN_LIMIT);
 		return newClock;
 	}
 
@@ -341,11 +343,11 @@ public class GameModel {
 		Random rand = new Random();
 		int index = 0;
 		
-		while(toUse[maxSize] == null) {
-			MrJackCharacter possible = potential[rand.nextInt(NUMBER_ACTIVE_CHARACTERS * 2)];
+		while(toUse[maxSize-1] == null) {
+			MrJackCharacter possible = potential[rand.nextInt(potential.length)];
 			boolean present = false;
 			for(MrJackCharacter mjc : toUse) {
-				if(toUse != null && mjc.getName().equals(possible.getName())){
+				if(mjc != null && mjc.getName().equals(possible.getName())){
 					present = true;
 				}
 			}

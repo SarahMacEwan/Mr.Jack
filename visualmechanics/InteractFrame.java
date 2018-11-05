@@ -87,6 +87,14 @@ public class InteractFrame extends JPanel{
 		g.drawImage(img, x - img.getWidth(null)/2, y - img.getHeight(null)/2, null);
 		addButton(x, y, img.getWidth(null), img.getHeight(null), "", new Color(0,0,0,0), g, key);
 	}
+	
+	public void addPicScaledCorner(int x, int y, String path, Graphics g, int scale) {
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		Image img = retrieveImage(path);
+		img = img.getScaledInstance(img.getWidth(null) * scale, img.getHeight(null) * scale, Image.SCALE_DEFAULT);
+		while(!tk.prepareImage(img, -1, -1, null)){	}
+		g.drawImage(img, x, y, null);
+	}
 
 	public void addText(int x, int y, String phrase, Graphics g){
 		JLabel label = new JLabel(phrase);
@@ -95,7 +103,7 @@ public class InteractFrame extends JPanel{
 		g.drawString(phrase, x - (int)label.getPreferredSize().getWidth()/2, y - (int)label.getPreferredSize().getHeight()/2 - metrics.getAscent());
 	}
 	
-	public void addTextScaled(int x, int y, String phrase, Graphics g, int scale){
+	public void addOwnTextScaled(int x, int y, String phrase, Graphics g, int scale){
 		for(int i = 0; i < phrase.length(); i++){
 			String address = "assets/Letters/";
 			if("0123456789".indexOf(phrase.charAt(i)) != -1){
@@ -145,9 +153,11 @@ public class InteractFrame extends JPanel{
 		corners[3] = y + hei/2;
 		corners[4] = key;
 		mouseEvent.addClickRegion(corners);
-		g.setColor(col);
-		g.fillRect(x - wid/2, y - hei/2, wid, hei);
-		g.setColor(maintain);
+		if(col != null) {
+			g.setColor(col);
+			g.fillRect(x - wid/2, y - hei/2, wid, hei);
+			g.setColor(maintain);
+		}
 		addText(x , y + hei, title, g);
 		mouseEvent.setEventSquare(eventSquare);
 	}
@@ -162,5 +172,17 @@ public class InteractFrame extends JPanel{
 	public void addTextField(int x, int y, int wid, int hei, Graphics g, int key){
 		//Add button so if clicked, changes state of KeyInput to record and save what is submitted and display as user types each letter.
 		//Clicking anywhere else should de-select
+	}
+
+	public void drawHexagon(int x, int y, int distance, Graphics g) {
+		double angleStart = -1 * Math.PI + Math.PI / 6.0;
+		for(int i = 0; i < 6; i++) {
+			int x1 = x + (int)(distance * Math.sin(angleStart + (i / (double)3) * Math.PI));
+			int x2 = x + (int)(distance * Math.sin(angleStart + ((i + 1) / (double)3) * Math.PI));
+			int y1 = y + (int)(distance * Math.cos(angleStart + (i / (double)3) * Math.PI));
+			int y2 = y + (int)(distance * Math.cos(angleStart + ((i + 1) / (double)3) * Math.PI));
+			g.drawLine(x1, y1, x2, y2);
+		}
+		
 	}
 }
