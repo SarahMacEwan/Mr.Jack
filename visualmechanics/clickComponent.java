@@ -18,7 +18,9 @@ public class clickComponent extends JComponent implements MouseListener{
 	}
 	
 	public int getSelected(){
-		return activeSelect;
+		int out = activeSelect;
+		resetSelected();
+		return out;
 	}
 	
 	public void resetSelected(){
@@ -56,7 +58,7 @@ public class clickComponent extends JComponent implements MouseListener{
 	}
 	
 	public void mouseReleased(MouseEvent e){
-		
+
 	}
 	
 	public void mouseEntered(MouseEvent e){
@@ -64,7 +66,7 @@ public class clickComponent extends JComponent implements MouseListener{
 	}
 	
 	public void mousePressed(MouseEvent e){
-		
+
 	}
 	
 	public void mouseExited(MouseEvent e){

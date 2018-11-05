@@ -1,5 +1,6 @@
 package game;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Timer;
 import visualmechanics.TimerRefresh;
@@ -53,8 +54,6 @@ public class GameView extends InteractFrame{
     double height;
     
     DrawnTile[] tileDrawing;
-    int ref1;
-    int ref2;
     
 //---  Constructors   -------------------------------------------------------------------------
 	
@@ -110,17 +109,15 @@ public class GameView extends InteractFrame{
 				if(curr[2 + j].equals("false") || curr[2 + j].equals("true"))
 					continue;
 				int refInd = Integer.parseInt(curr[2 + j]);
-				if(i == 0 && j == 0) {
-					ref1 = index;
-					ref2 = refInd;
-				}
+				if(refInd == -1)
+					continue;
 				double angle = 2 * Math.PI * ((double)j / (double)numNeigh);
 				if(reference.get(refInd) == null) {
-					DrawnTile newTile = new DrawnTile(nextTile.getX() - changeInX(angle, 1), nextTile.getY() - changeInY(angle, 1), null, refInd);
+					DrawnTile newTile = new DrawnTile(nextTile.getX() + changeInX(angle, 1), nextTile.getY() + changeInY(angle, 1), null, refInd);
 					reference.put(refInd, newTile);
 				}
-				double x = nextTile.getX() - changeInX(angle, 1);
-				double y = nextTile.getY() - changeInY(angle, 1);
+				double x = nextTile.getX() + changeInX(angle, 1);
+				double y = nextTile.getY() + changeInY(angle, 1);
 				reference.get(refInd).setX(x);
 				reference.get(refInd).setY(y);
 				minX = x < minX ? x : minX;
@@ -134,12 +131,12 @@ public class GameView extends InteractFrame{
 		
 		width = maxX - minX;
 		height = maxY - minY;
-		double changeX = (minX + maxX) / 2 - tileDrawing[0].getX();
-		double changeY = (minY + maxY) / 2 - tileDrawing[0].getY();
+		double changeX = (minX + maxX) / 2.0 - tileDrawing[0].getX();
+		double changeY = (minY + maxY) / 2.0 - tileDrawing[0].getY();
 		
 		for(DrawnTile dT : tileDrawing) {
-			dT.setX((dT.getX() + changeX));
-			dT.setY((dT.getY() + changeY));
+			dT.setX((dT.getX() - changeX));
+			dT.setY((dT.getY() - changeY));
 		}
 		
 		//TODO: Characters
@@ -164,10 +161,15 @@ public class GameView extends InteractFrame{
 		switch(gameState) {
 			case 0:
 				switch(getClickComponent().getSelected()) {
-					case 0: gameState = 1;
-					default:
+					case 0: gameState = 1; break;
+					default: break;
 				}
+				break;
 			case 1:
+				switch(getClickComponent().getSelected()) {
+					case 0:	gameState = 0; break;
+				}
+				break;
 		}
 		
 		repaint();
@@ -207,13 +209,17 @@ public class GameView extends InteractFrame{
 		addPicScaledCorner(0, 0, BOARD_FRAME_PATH, g, 4);
 		int ind = 0;
 
-		int size = 150;
+		int size = (int)(SCREEN_HEIGHT * 4.0 / 5.0 / height);
+		int size2 = (int)(SCREEN_WIDTH * 5.0 / 6.0 / width);
+		size = size < size2 ? size : size2;
+		
+		size = size > 50 ? 50 : size;
 		
 		for(DrawnTile dT : tileDrawing) {
 			if(dT == null)
 				continue;
 			drawTile(g, (int)(BOARD_CENTER_X + dT.getX() * size), (int)(BOARD_CENTER_Y + dT.getY() * size), size, dT.getType(), ind++);
-			addOwnTextScaled((int)(BOARD_CENTER_X + dT.getX() * size), (int)(BOARD_CENTER_Y + dT.getY() * size), dT.getIndex() + "", g, 2);
+			addOwnTextScaled((int)(BOARD_CENTER_X + dT.getX() * size), (int)(BOARD_CENTER_Y + dT.getY() * size), dT.getType() + ":" + dT.getIndex(), g, 2);
 		}
 		
 		
@@ -240,15 +246,15 @@ public class GameView extends InteractFrame{
 	
 	private void drawTile(Graphics g, int x, int y, int hyp, String type, int tile) {
 		drawHexagon(x, y, hyp, g);
-		addButton(x, y, hyp, hyp, "", null, g, tile);
+		addButton(x, y, (int)(1.3 * hyp), (int)(1.3 * hyp), "", null, g, tile);
 	}
 		
-	private double changeInX(double angle, int hyp) {
-		return (2.0 * hyp * Math.sin(angle + ANGLE_START));
+	private double changeInX(double angle, double hyp) {
+		return (2 * Math.cos(Math.PI / 6.0) * hyp * Math.sin(angle + ANGLE_START));
 	}
 	
-	private double changeInY(double angle, int hyp) {
-		return (2.0 * hyp * Math.cos(angle + ANGLE_START));
+	private double changeInY(double angle, double hyp) {
+		return (2 * Math.cos(Math.PI / 6.0) * hyp * Math.cos(angle + ANGLE_START));
 	}
 	
 }
