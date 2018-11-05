@@ -21,8 +21,8 @@ import javafx.scene.control.Button;
 
 public class GameView extends Application{
 
-	//instance variables go here :D
-	//includes list of buttons we need, and so on
+//---  Instance Variables   -------------------------------------------------------------------
+	
 	private Rectangle[] row1;
 	private Rectangle[] row2;
 	private Rectangle[] row3;
@@ -33,8 +33,12 @@ public class GameView extends Application{
 	private int[]buildings;// locations of the buildings
 	private int[] exits;// exit locations
 
+//---  Constructors   -------------------------------------------------------------------------
+	
 	public GameView(){}
 
+//---  Operations   ---------------------------------------------------------------------------
+	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		//add the initializations of the buttons and so on for the view
@@ -56,8 +60,18 @@ public class GameView extends Application{
 
 	}
 
-	//Drawing the GRID:
-	//method for drawing a row of 10 squares preset to size 100x100
+	
+//---  Drawing Methods   ----------------------------------------------------------------------
+	
+	/**
+	 * This method draws a row of 10 squares at the default size 100x100.
+	 * 
+	 * @param startX
+	 * @param startY
+	 * @param group
+	 * @return
+	 */
+	
 	public Rectangle[] drawEvenRow(int startX, int startY, Group group){
 		Rectangle[] row = new Rectangle[10];
 		for(int x = 0; x < 10; x++){
@@ -70,7 +84,15 @@ public class GameView extends Application{
 		return row;
 	}
 
-	//method for drawing a row of 9 squares preset to size 100x100
+	/**
+	 * This method draws a row of 9 squares at the default size 100x100.
+	 * 
+	 * @param startX
+	 * @param startY
+	 * @param group
+	 * @return
+	 */
+	
 	public Rectangle[] drawOddRow(int startX, int startY, Group group){
 		Rectangle[] row = new Rectangle[9];
 		for(int x = 0; x < 9; x++){
@@ -83,16 +105,26 @@ public class GameView extends Application{
 		return row;
 	}
 
+	/**
+	 * This method tentatively draws a String to a specified grid location
+	 * 
+	 * @param row
+	 * @param col
+	 * @return
+	 */
+	
 	private Text getTextForLocation(int row, int col){
 		//method is currently never called, because I couldn't figure out how to overlay text over the rectangles
 		Text t = new Text("");
 		if(row == 3 && col == 5){
 			//this will have some if statements to determine what text, if any, should go on that location
-			//options include "Lamp", "Manhole", "Building", "Corodon", and character names
+			//options include "Lamp", "Manhole", "Building", "Cordon", and character names
 			t.setText("Test :D");
 		}
 		return t;
 	}
+	
+	
 
 	//handling mouse clicks on rectanlges :D
 	private void clicksInRow1(){

@@ -89,6 +89,7 @@ public class GameModel {
 		for(MrJackCharacter mjc : allMrJackCharacters) {
 			mjc.setSuspect(true);
 			mjc.setLit(false);
+			mjc.deriveFromModel(this);
 		}
 	}
 
@@ -207,7 +208,7 @@ public class GameModel {
 		for(MrJackCharacter mjc : usedMrJackCharacters) {
 			out += mjc.convertToOutboundFormat();
 		}
-		return null;
+		return out;
 	}
 
 	/**

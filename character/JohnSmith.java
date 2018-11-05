@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import game.Board;
 import game.GameModel;
-import tile.Exit;
 import tile.Tile;
 import tile.Lantern;
 

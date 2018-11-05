@@ -80,13 +80,26 @@ public class Board {
 		return reachable;
 	}
 	
+	/**
+	 * 
+	 * Format: [index #] [identity char] [neighbors # # # # # #] [optional: state]
+	 * 
+	 * @return
+	 */
+	
 	public String convertToOutboundFormat() {
 		String out = "";
 		int loc = 0;
 		for(Tile t : tiles) {
-			out += (loc++);
+			out += (loc++) + " " + t.getIdentity();
 			for(int i : t.getNeighbors()) {
 				out += " " + i;
+			}
+			switch(t.getIdentity()) {
+				case 'l': out += " " + ((Lantern)t).getLight(); break;
+				case 'e': out += " " + ((Exit)t).getBlocked(); break;
+				case 'm': out += " " + ((Manhole)t).getCovered(); break;
+				default: break;
 			}
 			out += "\n";
 		}
