@@ -71,7 +71,8 @@ public class GameModel {
 		return true;
 	}
 
-	public boolean moveMrJackCharacter(int choice) {			//Controller is told by the player whether moving or action
+	public boolean moveMrJackCharacter(int choice) {
+		//Controller is told by the player whether moving or action
 		//move if legal, return false otherwise
 		return false;
 	}
