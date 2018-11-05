@@ -7,14 +7,14 @@ Tentative implementation of the Mr. Jack game for Comp 3721, Object Oriented Des
 Responsibilities:
  - Mac:
     - View
-    - Board
-    - Clock
+    - Board (DONE)
+    - Clock (DONE)
     - Tile
     - nice code documentation
  - Sarah:
     - Controller
-    - Player
-    - Character
+    - Player (DONE)
+    - Character (DONE)
     - View
     - the writeup :D
     -updated UML diagrams
@@ -41,7 +41,7 @@ Responsibilities:
 
 
 Characters we will implement:
-Ms. Stealthy
+Ms. Stealthy - can move through buildings
 John Smith - swaps lanterns
 Sir Willium Gull - character swapper
 Inspector Lestrade - swaps police barriers

@@ -121,6 +121,7 @@ public class GameModel {
 		return true;
 	}
 
+
 	/**
 	 * This method tentatively moves the currently selected MrJackCharacter to the specified
 	 * location by index in the Board's array of Tiles.
