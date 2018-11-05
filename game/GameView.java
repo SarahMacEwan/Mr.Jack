@@ -33,6 +33,10 @@ public class GameView extends InteractFrame{
     private static final String BOTTOM_FRAME_PATH = "assets/UI/bottomBar1.png";
     private static final String BOARD_FRAME_PATH = "assets/UI/boardFrame2.png";
     private static final String CLOCK_FACE_PATH = "assets/UI/clockFace1.png";
+    private static final String BANNER_PATH_COPPER = "assets/UI/bannerCopper.png";
+    private static final String BANNER_PATH_GOLD = "assets/UI/bannerGold.png";
+    
+    private static final String[] PLAYER_TITLES = {"Detective", "Mr. Jack"};
 
 	private final int REFRESH_RATE = 1000/15;
 	private final double ANGLE_START = 2 * Math.PI / 3.0;
@@ -42,6 +46,8 @@ public class GameView extends InteractFrame{
     Timer timer;
     String boardState;
     int gameState;
+    
+    int cycle;
     
     int turnNumber;
     int currentPlayer;
@@ -57,6 +63,8 @@ public class GameView extends InteractFrame{
     DrawnTile[] tileDrawing;
     
     int[] reachable;
+    String[] chosenCharacters;
+    String[] usedCharacters;
     
 //---  Constructors   -------------------------------------------------------------------------
 	
@@ -69,6 +77,8 @@ public class GameView extends InteractFrame{
 		gameState = 0;
 		setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 		tileDrawing = new DrawnTile[0];
+		chosenCharacters = new String[0];
+		usedCharacters = new String[0];
 	}
 
 //---  Operations   ---------------------------------------------------------------------------
@@ -142,16 +152,36 @@ public class GameView extends InteractFrame{
 			dT.setY((dT.getY() - changeY));
 		}
 		
-		System.out.println(code);
-		
 		//TODO: Characters
 		
-		//TODO: Reachable
+		int numChar = Integer.parseInt(sc.nextLine());	//[Name] [Location] [Is lit?] [Is Suspected?]
+		chosenCharacters = new String[numChar];
+		for(int i = 0; i < numChar; i++) {
+			chosenCharacters[i] = sc.nextLine();
+		}
+		
+		
+		//TODO: Clock
+		turnNumber = Integer.parseInt(sc.nextLine());
+		
+		//TODO: Current Player
+		currentPlayer = Integer.parseInt(sc.nextLine());
+		
+		//TODO: Selected Characters
+		usedCharacters = new String[Integer.parseInt(sc.nextLine())];
+		
+		for(int i = 0; i < usedCharacters.length; i++) {
+			usedCharacters[i] = sc.nextLine();
+		}
+		
+		//TODO: Active Character, Reachable
 		
 		sc.close();
 	}
 	
 	public void paintComponent(Graphics g) {
+		cycle++;
+		cycle %= 90;
 		switch(gameState) {
 			case 0: drawMenu(g);
 					break;
@@ -226,7 +256,14 @@ public class GameView extends InteractFrame{
 			if(dT == null)
 				continue;
 			drawTile(g, (int)(BOARD_CENTER_X + dT.getX() * size), (int)(BOARD_CENTER_Y + dT.getY() * size), size, dT.getType(), ind++);
-			addOwnTextScaled((int)(BOARD_CENTER_X + dT.getX() * size), (int)(BOARD_CENTER_Y + dT.getY() * size), dT.getType() + ":" + dT.getIndex(), g, 2);
+			if(cycle < 90) {
+				addOwnTextScaled((int)(BOARD_CENTER_X + dT.getX() * size), (int)(BOARD_CENTER_Y + dT.getY() * size) - TEXT_HEIGHT, dT.getType() + ":" + dT.getIndex(), g, 2);
+				for(int i = 0; i < chosenCharacters.length; i++) {
+					String[] in = chosenCharacters[i].split(" ");
+					int inde = Integer.parseInt(in[1]);
+					addOwnTextScaled((int)(BOARD_CENTER_X + tileDrawing[inde].getX() * size), (int)(BOARD_CENTER_Y + tileDrawing[inde].getY() * size) + TEXT_HEIGHT * 2, in[0], g, 2);
+				}
+			}
 		}
 		
 		
@@ -247,7 +284,17 @@ public class GameView extends InteractFrame{
 		addPicScaledCorner(SCREEN_WIDTH*5/6, 0, SIDE_FRAME_PATH, g, 4);
 		addPicScaled(SCREEN_WIDTH*11/12, SCREEN_HEIGHT * 1/10, CLOCK_FACE_PATH, g, 4);
 		addOwnTextScaled(SCREEN_WIDTH*11/12, SCREEN_HEIGHT / 10 + TEXT_HEIGHT * 2, turnNumber + "", g, 3);
+		addOwnTextScaled(SCREEN_WIDTH*11/12, SCREEN_HEIGHT / 5, PLAYER_TITLES[currentPlayer], g, 3);
 		
+		for(int i = 0; i < 4; i++) {
+			if(currentPlayer == 0)
+				addPicScaled(SCREEN_WIDTH*11/12, SCREEN_HEIGHT / 5 + SCREEN_HEIGHT / 8 * (i + 1), i == 0 || i == 3 ? BANNER_PATH_GOLD : BANNER_PATH_COPPER, g, 4);
+			else if(currentPlayer == 1)
+				addPicScaled(SCREEN_WIDTH*11/12, SCREEN_HEIGHT / 5 + SCREEN_HEIGHT / 8 * (i + 1), i == 1 || i == 2 ? BANNER_PATH_GOLD : BANNER_PATH_COPPER, g, 4);
+			if(usedCharacters[i] != null) {
+				addOwnTextScaled(SCREEN_WIDTH*11/12, SCREEN_HEIGHT / 5 + SCREEN_HEIGHT / 8 * (i + 1), usedCharacters[i], g, 2);
+			}
+		}
 	}
 	
 	private void drawInteraction(Graphics g) {

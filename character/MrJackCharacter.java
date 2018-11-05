@@ -25,6 +25,8 @@ public abstract class MrJackCharacter {
 	boolean isSuspect;
 	/** boolean value representing whether or not this MrJackCharacter is currently 'lit'*/
 	boolean isLit;
+	/** */
+	String shortName;
 	
 //---  Operations   ---------------------------------------------------------------------------
 	
@@ -81,7 +83,7 @@ public abstract class MrJackCharacter {
 	 */
 	
 	public String convertToOutboundFormat() {
-		return name + " " + tileIndex + " " + (isLit ? "1" : "0") + " " + (isSuspect ? "1" : "0");
+		return shortName + " " + tileIndex + " " + (isLit ? "1" : "0") + " " + (isSuspect ? "1" : "0") + "\n";
 	}
 	
 //---  Getter Methods   -----------------------------------------------------------------------
@@ -134,6 +136,10 @@ public abstract class MrJackCharacter {
 	
 	public int getDistance() {
 		return numMoves;
+	}
+	
+	public String getShortName() {
+		return shortName;
 	}
 	
 //---  Setter Methods   -----------------------------------------------------------------------

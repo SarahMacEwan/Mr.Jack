@@ -88,10 +88,18 @@ public class GameModel {
 		selectedMrJackCharacters.clear();
 		currentMrJackCharacter = null;
 		activeMrJackCharacters = new MrJackCharacter[0];
+		Random rand = new Random();
+		HashSet<Integer> used = new HashSet<Integer>();
 		for(MrJackCharacter mjc : allMrJackCharacters) {
 			mjc.setSuspect(true);
 			mjc.setLit(false);
 			mjc.deriveFromModel(this);
+			int loc = rand.nextInt(board.getNumberOfTiles());
+			while(used.contains(loc)) {
+				loc = rand.nextInt(board.getNumberOfTiles());
+			}
+			mjc.setLocation(loc);
+			used.add(loc);
 		}
 	}
 
@@ -208,6 +216,8 @@ public class GameModel {
 	public String outputGameState() {
 		String out = board.convertToOutboundFormat();	//Board tiles
 		
+		out += activeMrJackCharacters.length + "\n";
+		
 		for(MrJackCharacter mjc : activeMrJackCharacters) {	//Character locations
 			out += mjc.convertToOutboundFormat();
 		}
@@ -216,7 +226,22 @@ public class GameModel {
 		
 		out += player + "\n";						//Current Player
 		
+		out += usedMrJackCharacters.length + "\n";
+		
+		int indLoc = -1;
+		for(MrJackCharacter mjc : usedMrJackCharacters) {			//Used/Selected Characters
+			indLoc++;
+			if(mjc == null || !selectedMrJackCharacters.contains(indLoc))
+				out += "-\n";
+			else {
+				out += mjc.getName() + "\n";
+			}
+		}
+		
+		out += "\n";
 													//Active character, reach, ability
+		
+		
 		return out;
 	}
 
@@ -395,8 +420,8 @@ public class GameModel {
 		newMrJackCharacters = new MrJackCharacter[NUMBER_ACTIVE_CHARACTERS];
 		
 		while(newMrJackCharacters[NUMBER_ACTIVE_CHARACTERS - 1] == null) {
-			int ind = rand.nextInt(activeMrJackCharacters.length);
-			MrJackCharacter possible = activeMrJackCharacters[ind];
+			int ind = rand.nextInt(allMrJackCharacters.length);
+			MrJackCharacter possible = allMrJackCharacters[ind];
 			boolean result = true;
 			if(potential != null) {
 				for(MrJackCharacter mjc : potential)

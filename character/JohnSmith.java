@@ -19,10 +19,12 @@ public class JohnSmith extends MrJackCharacter {
 //---  Constant Values   ----------------------------------------------------------------------
 
 	/** Constant String object representing the name of this JohnSmith object*/
-	private static final String NAME = "John Smith";
+	private static final String NAME = "JohnSmith";
 	/** Constant int value representing the total number of moves this JohnSmith object can do in one turn*/
 	private static final int NUM_MOVES = 3;
-
+	/** Constant String object representing the shorthand name for this MrJackCharacter object*/
+	private static final String SHORT_NAME = "J.S";
+	
 //---  Instance Variables   -------------------------------------------------------------------
 
 	/** ArrayList<<r>Exit> object describing the Tile objects associated to this InspectorLestrade object*/
@@ -40,6 +42,7 @@ public class JohnSmith extends MrJackCharacter {
 		name = NAME;
 		numMoves = NUM_MOVES;
 		relevantTiles = new ArrayList<Lantern>();
+		shortName = SHORT_NAME;
 	}
 
 //---  Operations   ---------------------------------------------------------------------------

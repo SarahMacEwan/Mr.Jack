@@ -43,6 +43,7 @@ public class GameController {
 
     public void startMrJack() {
     	theGame.startGame();
+    	theGame.startTurn();
     	updateView();
     }
     

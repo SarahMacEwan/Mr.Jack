@@ -7,9 +7,11 @@ public class SirWilliamGull extends MrJackCharacter{
 //---  Constant Values   ----------------------------------------------------------------------\
 
 	/** Constant String object representing the name of this InspectorLestrade object*/
-	private static final String NAME = "Sir William Gull";
+	private static final String NAME = "SirWilliamGull";
 	/** Constant int value representing the total number of moves this InspectorLestrade object can do in one turn*/
 	private static final int NUM_MOVES = 3;
+	/** Constant String object representing the shorthand name for this MrJackCharacter object*/
+	private static final String SHORT_NAME = "S.W.G";
 
 //---  Instance Variables   -------------------------------------------------------------------
 
@@ -27,6 +29,7 @@ public class SirWilliamGull extends MrJackCharacter{
 		name = NAME;
 		numMoves = NUM_MOVES;
 		characters = new MrJackCharacter[4];
+		shortName = SHORT_NAME;
 	}
 
 //---  Operations   ---------------------------------------------------------------------------

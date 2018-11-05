@@ -187,6 +187,16 @@ public class Board {
 		return out;
 	}
 	
+	/**
+	 * 
+	 * 
+	 * @return
+	 */
+	
+	public int getNumberOfTiles() {
+		return tiles.length;
+	}
+	
 //---  Helper Methods   ---------------------------------------------------------------------------
 	
 	/**
