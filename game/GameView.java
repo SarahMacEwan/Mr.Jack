@@ -1,16 +1,13 @@
 package game;
 
-import javafx.application.Application;
-import javafx.event.EventHandler;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
-import javafx.scene.*;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.control.Button;
+import java.awt.Graphics;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.Timer;
+import javax.swing.JPanel;
+import visualmechanics.TimerRefresh;
+import visualmechanics.InteractFrame;
+import visualmechanics.clickComponent;
 
 /**
  * Central point for all visual components
@@ -19,215 +16,96 @@ import javafx.scene.control.Button;
  *
  */
 
-public class GameView extends Application{
+public class GameView extends InteractFrame{
 
-//---  Instance Variables   -------------------------------------------------------------------
+//---  Constant Values   ----------------------------------------------------------------------
 	
-	private Rectangle[] row1;
-	private Rectangle[] row2;
-	private Rectangle[] row3;
-	private Rectangle[] row4;
-	private Rectangle[] row5;
-	private int[] lanternLocations; //locations of the lanterns will be (this kind of depends on how the controller will input/output things)
-	private int[] manholeLocations; //locations of the manholes
-	private int[]buildings;// locations of the buildings
-	private int[] exits;// exit locations
+	private static final int SCREEN_WIDTH = 1200;
+    private static final int SCREEN_HEIGHT = 800;
+	private static final int TEXT_HEIGHT = 8;
+    private static final String[] TITLE_MENU_TEXT = {"Mr.Jack", "A Game", "(By Mac and Sarah)"};
+    
+    private static final String MENU_BACKGROUND_PATH = "assets/images/mrjackBack1.png";
 
+	private final int REFRESH_RATE = 1000/15;
+    
+//---  Instance Variables   -------------------------------------------------------------------
+
+    Timer timer;
+    
 //---  Constructors   -------------------------------------------------------------------------
 	
-	public GameView(){}
+	public GameView(){
+		super();
+		repaint();
+		timer = new Timer();
+		timer.schedule(new TimerRefresh(this), 0, REFRESH_RATE);
+	}
 
 //---  Operations   ---------------------------------------------------------------------------
+
+	public void update(String code) {
+		
+	}
 	
+	public void paintComponent(Graphics g) {
+		drawMenu(g);
+	}
+
 	@Override
-	public void start(Stage primaryStage) throws Exception {
-		//add the initializations of the buttons and so on for the view
-
-		Group root = new Group();
-
-		drawEvenRow(10, 10, root);	//row 1
-		drawOddRow(60, 110, root);	//row 2
-		drawEvenRow(10, 210, root);	//row 3
-		drawOddRow(60, 310, root);	//row 4
-		drawEvenRow(10, 410, root);	//row 5
-
-		handle();
-
-		Scene scene = new Scene(root, 600, 300);
-		primaryStage.setTitle("This is a test Hexagon");
-		primaryStage.setScene(scene);
-		primaryStage.show();
-
+	public void clickEvent() {
+		
+		
+		repaint();
 	}
 
+	@Override
+	public void keyEvent() {
+		
+		
+		repaint();
+	}
 	
-//---  Drawing Methods   ----------------------------------------------------------------------
+//---  Helper Methods   -----------------------------------------------------------------------
 	
 	/**
-	 * This method draws a row of 10 squares at the default size 100x100.
+	 * This method draws the introductory menu at which the user can start a game
 	 * 
-	 * @param startX
-	 * @param startY
-	 * @param group
-	 * @return
+	 * @param g
 	 */
 	
-	public Rectangle[] drawEvenRow(int startX, int startY, Group group){
-		Rectangle[] row = new Rectangle[10];
-		for(int x = 0; x < 10; x++){
-			int offsetX = startX + x*100;
-			Rectangle newRect = new Rectangle(offsetX, startY, 100, 100);
-			newRect.setStroke(Color.BLACK);
-			newRect.setFill(Color.GREY);
-			group.getChildren().add(newRect);
-		}
-		return row;
+	private void drawMenu(Graphics g) {
+		addPicScaled(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, MENU_BACKGROUND_PATH, g, 4);
+		addTextScaled(SCREEN_WIDTH/2, SCREEN_HEIGHT/6, TITLE_MENU_TEXT[0], g, 8);
+		addTextScaled(SCREEN_WIDTH/2, SCREEN_HEIGHT/6 + 8 * TEXT_HEIGHT, TITLE_MENU_TEXT[1], g, 4);
+		addTextScaled(SCREEN_WIDTH/2, SCREEN_HEIGHT/6 + 12 * TEXT_HEIGHT, TITLE_MENU_TEXT[2], g, 2);
+		
 	}
 
 	/**
-	 * This method draws a row of 9 squares at the default size 100x100.
+	 * This method draws the current board's state
 	 * 
-	 * @param startX
-	 * @param startY
-	 * @param group
-	 * @return
+	 * @param g
 	 */
 	
-	public Rectangle[] drawOddRow(int startX, int startY, Group group){
-		Rectangle[] row = new Rectangle[9];
-		for(int x = 0; x < 9; x++){
-			int offsetX = startX + x*100;
-			Rectangle newRect = new Rectangle(offsetX, startY, 100, 100);
-			newRect.setStroke(Color.BLACK);
-			newRect.setFill(Color.GREY);
-			group.getChildren().add(newRect);
-		}
-		return row;
+	private void drawBoard(Graphics g) {
+		
 	}
 
 	/**
-	 * This method tentatively draws a String to a specified grid location
+	 * This method draws the UI around the board during the game.
 	 * 
-	 * @param row
-	 * @param col
-	 * @return
+	 * @param g
 	 */
 	
-	private Text getTextForLocation(int row, int col){
-		//method is currently never called, because I couldn't figure out how to overlay text over the rectangles
-		Text t = new Text("");
-		if(row == 3 && col == 5){
-			//this will have some if statements to determine what text, if any, should go on that location
-			//options include "Lamp", "Manhole", "Building", "Cordon", and character names
-			t.setText("Test :D");
-		}
-		return t;
+	private void drawBorder(Graphics g) {
+		
 	}
 	
-	
-
-	//handling mouse clicks on rectanlges :D
-	private void clicksInRow1(){
-		//loop for registering clicks in row1
-		for(int x = 0; x < 10; x++){
-			Rectangle rect = row1[x];
-			rect.setOnMouseClicked(new EventHandler<MouseEvent>() {
-				@Override
-				public void handle(MouseEvent event) {
-					//
-					System.out.println("This works??!?!?!");
-				}
-			});
-		}
+	private void drawHexagon(Graphics g) {
+		
 	}
-
-	private void clicksInRow2(){
-		//loop for registering clicks in row2
-		for(int x = 0; x < 9; x++){
-			Rectangle rect = row2[x];
-			rect.setOnMouseClicked(new EventHandler<MouseEvent>() {
-				@Override
-				public void handle(MouseEvent event) {
-					//
-					System.out.println("This works??!?!?!");
-				}
-			});
-		}
-	}
-
-	private void clicksInRow3(){
-		//loop for registering clicks in row3
-		for(int x = 0; x < 10; x++){
-			Rectangle rect = row3[x];
-			rect.setOnMouseClicked(new EventHandler<MouseEvent>() {
-				@Override
-				public void handle(MouseEvent event) {
-					//
-					System.out.println("This works??!?!?!");
-				}
-			});
-		}
-	}
-
-	private void clicksInRow4(){
-		//loop for registering clicks in row4
-		for(int x = 0; x < 9; x++){
-			Rectangle rect = row4[x];
-			rect.setOnMouseClicked(new EventHandler<MouseEvent>() {
-				@Override
-				public void handle(MouseEvent event) {
-					//
-					System.out.println("This works??!?!?!");
-				}
-			});
-		}
-	}
-
-	private void clicksInRow5(){
-		//loop for registering clicks in row5
-		for(int x = 0; x < 10; x++){
-			Rectangle rect = row5[x];
-			rect.setOnMouseClicked(new EventHandler<MouseEvent>() {
-				@Override
-				public void handle(MouseEvent event) {
-					//
-					System.out.println("This works??!?!?!");
-				}
-			});
-		}
-	}
-
-
-	private void handle(){
-		//method for handling all possible user action events :D
-		//it's messy, but it works, friends :D
-
-		clicksInRow1();
-
-		clicksInRow2();
-
-		clicksInRow3();
-
-		clicksInRow4();
-
-		clicksInRow5();
-
-
-	}
-
-
-	public void update(String everything) {
-		//this will update the ____Locations instance variables
-		//so that when we re-draw the grid, the appropriate changes are made
-
-	}
-
-	public static void main(String[] args){
-		launch(args);
-	}
-
-
-	
+		
 }
 
 

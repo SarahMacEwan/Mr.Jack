@@ -3,6 +3,8 @@ package game;
 import character.*;
 import java.io.*;
 
+import javax.swing.JFrame;
+
 /**
  * Central point for communication between Model and View.
  * 
@@ -18,6 +20,8 @@ public class GameController {
 														 new JohnSmith(),
 														 new MissStealthy(),
 														 new SirWilliamGull()};
+    private static final int SCREEN_WIDTH = 1200;
+    private static final int SCREEN_HEIGHT = 800;
 	
 //---  Instance Variables   -------------------------------------------------------------------
 	
@@ -29,20 +33,16 @@ public class GameController {
 //---  Constructors   -------------------------------------------------------------------------
 	
     public GameController(File f){
+    	JFrame frame = readyFrame();
         theGame = new GameModel(f, CHARACTERS);
+        theView = new GameView();
+        frame.add(theView);
     }
     
 //---  Operations   ---------------------------------------------------------------------------
 
     public void startMrJack() {
     	
-    	
-    	
-    	/*
-    	 * Starter menu - allows new game to be started
-    	 * Game board
-    	 * 
-    	 */
     }
     
     public void updateView(){
@@ -57,5 +57,13 @@ public class GameController {
     	}
     }
     
+//---  Helper Methods   -----------------------------------------------------------------------
 
+    public static JFrame readyFrame(){
+		JFrame frame = new JFrame();
+		frame.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+		frame.setVisible(true);
+		return frame;
+	}
+    
 }

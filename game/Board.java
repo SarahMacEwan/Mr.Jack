@@ -9,6 +9,7 @@ import tile.Lantern;
 import tile.Manhole;
 import tile.Exit;
 import tile.Building;
+import tile.Road;
 
 /**
  * This class models the Board that the Players manipulate for the Mr. Jack game.
@@ -24,7 +25,7 @@ public class Board {
 	
 //---  Constant Values   ----------------------------------------------------------------------
 	
-	private static final char[] IDENTITIES = {'b', 'e', 'l', 'm'};
+	private static final char[] IDENTITIES = {'b', 'e', 'l', 'm', 'r'};
 	
 //---  Instance Variables   -------------------------------------------------------------------
 
@@ -229,6 +230,10 @@ public class Board {
 				Building build = new Building(Integer.parseInt(detes[0]));
 				build.assignNeighbors(neighbors);
 				return build;
+			case "r":
+				Road rd = new Road(Integer.parseInt(detes[0]));
+				rd.assignNeighbors(neighbors);
+				return rd;
 			default:
 				System.out.println("Invalid entry for this kind of Board object");
 				return null;
