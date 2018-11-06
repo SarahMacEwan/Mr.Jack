@@ -127,7 +127,10 @@ public class GameModel {
 	public boolean chooseMrJackCharacter(int choice) {
 		if(selectedMrJackCharacters.contains(choice))
 			return false;
-		currentMrJackCharacter = activeMrJackCharacters[choice];
+		for(MrJackCharacter mjc : activeMrJackCharacters) {
+			if(mjc.getLocation() == choice)
+			currentMrJackCharacter = mjc;
+		}
 		selectedMrJackCharacters.add(choice);
 		return true;
 	}
@@ -250,15 +253,19 @@ public class GameModel {
 			}
 		}
 		
+		//-- Active Character  --------------------------------
+
+		if(currentMrJackCharacter != null)
+			out += currentMrJackCharacter.getName() + "\n" + currentMrJackCharacter.requiredValuesForAbility() + "\n";
+		else
+			out += "null\n-1\n";
+		
 		//-- Reachable Tiles  ---------------------------------
 		
 													//Active character, reach, ability
 		boolean[] reach = board.getLegalMovement(currentMrJackCharacter);
 		
-		if(currentMrJackCharacter != null)
-			out += currentMrJackCharacter.getName() + "\n";
-		else
-			out += "null\n";
+
 		
 		for(int i = 0; i < reach.length; i++)
 			out += (reach[i] ? 1 : 0) + (i + 1 == reach.length ? "\n" : " ");

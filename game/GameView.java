@@ -8,7 +8,7 @@ import visualmechanics.InteractFrame;
 import java.util.Scanner;
 import java.util.Arrays;
 import java.util.HashMap;
-
+import java.util.ArrayList;
 
 /**
  * Central point for all visual components
@@ -38,14 +38,21 @@ public class GameView extends InteractFrame{
     private static final String BANNER_PATH_GOLD = "assets/UI/bannerGold.png";
     private static final String LIT_TILE_IMAGE_PATH = "assets/UI/litTile1.png";
     private static final String REACHABLE_TILE_IMAGE_PATH = "assets/UI/reachableTile1.png ";
+    private static final String SUSPECT_IMAGE_PATH = "assets/UI/suspect1.png";
+    private static final String UNSUSPECTED_IMAGE_PATH = "assets/UI/notSuspect1.png";
     
     private static final String[] PLAYER_TITLES = {"Detective", "Mr. Jack"};
+    private static final String USER_MOVE = "MOVE";
+    private static final String USER_ABILITY = "ABILITY";
+    private static final String MENU_LABEL = "MENU";
+    private static final String USER_CANCEL = "CANCEL";
 
 	private final int REFRESH_RATE = 1000/15;
 	private final double ANGLE_START = 2 * Math.PI / 3.0;
     
 //---  Instance Variables   -------------------------------------------------------------------
 
+	GameController controller;
     Timer timer;
     String boardState;
     int gameState;
@@ -54,10 +61,6 @@ public class GameView extends InteractFrame{
     int currentPlayer;
     int lanternCounter;
     
-    double maxX;
-    double maxY;
-    double minX;
-    double minY;
     double width;
     double height;
     
@@ -69,11 +72,15 @@ public class GameView extends InteractFrame{
     String[] chosenCharacters;
     String[] usedCharacters;
     String currCharacter;
+    ArrayList<Integer> logInput;
+    
+    int abilityInput;
     
 //---  Constructors   -------------------------------------------------------------------------
 	
-	public GameView(){
+	public GameView(GameController reference){
 		super();
+		controller = reference;
 		repaint();
 		timer = new Timer();
 		timer.schedule(new TimerRefresh(this), 0, REFRESH_RATE);
@@ -106,10 +113,10 @@ public class GameView extends InteractFrame{
 		int numNeigh = Integer.parseInt(first[1]);
 		tileDrawing = new DrawnTile[numTile];
 		HashMap<Integer, DrawnTile> reference = new HashMap<Integer, DrawnTile>();
-		minX = 10;
-		minY = 10;
-		maxX = -10;
-		maxY = -10;
+		double minX = 10;
+		double minY = 10;
+		double maxX = -10;
+		double maxY = -10;
 		
 		//-- Tiles  -------------------------------------------
 		
@@ -185,7 +192,9 @@ public class GameView extends InteractFrame{
 		
 		//-- Currently Selected Character  --------------------
 		
+		
 		currCharacter = sc.nextLine();
+		abilityInput = Integer.parseInt(sc.nextLine());
 		
 		//-- Reachable Tiles  ---------------------------------
 		
@@ -223,6 +232,7 @@ public class GameView extends InteractFrame{
 		switch(gameState) {
 			case 0: drawMenu(g);
 					break;
+			case 2: drawCancel(g);
 			case 1: drawBoard(g); 
 					drawBorder(g); 
 					break;
@@ -233,18 +243,49 @@ public class GameView extends InteractFrame{
 
 	@Override
 	public void clickEvent() {
+		int action = getClickComponent().getSelected();
 		switch(gameState) {
 			case 0:
-				switch(getClickComponent().getSelected()) {
-					case 0: gameState = 1; break;
+				switch(action) {
+					case 0: gameState = 1; 
+							controller.conveyAction(-1, null);
+							break;
 					default: break;
 				}
 				break;
 			case 1:
-				switch(getClickComponent().getSelected()) {
-					case 0:	gameState = 0; break;
+				switch(action) {
+					case -2: gameState = 0;			//Main menu
+							 break;
+					case -3: 						//Movement
+							 logInput = new ArrayList<Integer>();
+							 break;
+					case -4: 						//Ability
+							 logInput = new ArrayList<Integer>();
+							 break;
+					default: controller.conveyAction(2, new int[] {action});	//Send Tile info over for Character selection
+							 break;
 				}
 				break;
+			case 2:
+				switch(action) {
+					case -2: gameState = 0;			//Main menu
+							 break;
+					case -3: 						//Read more input - Movement
+							 if(logInput.size() >= 1) {
+								 System.out.println(logInput.get(0));
+								 controller.conveyAction(0, new int[] {logInput.get(0)});
+							 }
+							 break;
+					case -4: 						//Read more input - Ability
+							 logInput = new ArrayList<Integer>();
+							 break;
+					case -5: gameState = 1;			//Cancel action
+							 logInput = null;
+							 break;
+					default: logInput.add(action);	//Send Tile info over for Character selection
+							 break;
+				}
 		}
 		
 		repaint();
@@ -288,7 +329,7 @@ public class GameView extends InteractFrame{
 		int size2 = (int)(SCREEN_WIDTH * 5.0 / 6.0 / width);
 		size = size < size2 ? size : size2;
 		
-		size = size > 50 ? 50 : size;
+		size = size > 75 ? 75 : size;
 		
 		for(DrawnTile dT : tileDrawing) {
 			if(dT == null)
@@ -298,6 +339,12 @@ public class GameView extends InteractFrame{
 				String[] in = chosenCharacters[i].split(" ");
 				int inde = Integer.parseInt(in[1]);
 				addOwnTextScaled((int)(BOARD_CENTER_X + tileDrawing[inde].getX() * size), (int)(BOARD_CENTER_Y + tileDrawing[inde].getY() * size) + TEXT_HEIGHT * 2, in[0], g, 2);
+				if(suspect[i]) {
+					addPicScaled((int)(BOARD_CENTER_X + tileDrawing[inde].getX() * size), (int)(BOARD_CENTER_Y + tileDrawing[inde].getY() * size) - TEXT_HEIGHT * 4, SUSPECT_IMAGE_PATH, g, 1);
+				}
+				else {
+					addPicScaled((int)(BOARD_CENTER_X + tileDrawing[inde].getX() * size), (int)(BOARD_CENTER_Y + tileDrawing[inde].getY() * size) - TEXT_HEIGHT * 4, UNSUSPECTED_IMAGE_PATH, g, 1);
+				}
 			}
 		}
 		
@@ -334,6 +381,20 @@ public class GameView extends InteractFrame{
 	
 	private void drawInteraction(Graphics g) {
 		addPicScaledCorner(0, SCREEN_HEIGHT*4/5, BOTTOM_FRAME_PATH, g, 4);
+		
+		addClickPicScaled(SCREEN_WIDTH/10 - TEXT_HEIGHT, SCREEN_HEIGHT * 9 / 10, MENU_FRAME_PATH, g, -3, 2);
+		addOwnTextScaled(SCREEN_WIDTH/10 - TEXT_HEIGHT, SCREEN_HEIGHT * 9 / 10, USER_MOVE, g, 3);
+		
+		addClickPicScaled(SCREEN_WIDTH/4, SCREEN_HEIGHT * 9 / 10, MENU_FRAME_PATH, g, -4, 2);
+		addOwnTextScaled(SCREEN_WIDTH/4, SCREEN_HEIGHT * 9 / 10, USER_ABILITY, g, 3);
+		
+		addClickPicScaled(SCREEN_WIDTH * 9 / 10, SCREEN_HEIGHT * 9 / 10, MENU_FRAME_PATH, g, -2, 2);
+		addOwnTextScaled(SCREEN_WIDTH * 9 / 10, SCREEN_HEIGHT * 9 / 10, MENU_LABEL, g, 3);	
+	}
+
+	private void drawCancel(Graphics g) {
+		addClickPicScaled(SCREEN_WIDTH*3/4, SCREEN_HEIGHT * 9 / 10, MENU_FRAME_PATH, g, -5, 2);
+		addOwnTextScaled(SCREEN_WIDTH*3/4, SCREEN_HEIGHT * 9 / 10, USER_CANCEL, g, 3);
 	}
 	
 	private void drawTile(Graphics g, int x, int y, int hyp, String type, int tile) {
@@ -341,9 +402,9 @@ public class GameView extends InteractFrame{
 		addButton(x, y, (int)(1.3 * hyp), (int)(1.3 * hyp), "", null, g, tile);		//Clickable
 		addOwnTextScaled(x, y - TEXT_HEIGHT, type, g, 2);		//Type of Tile
 		if(lit[tile])											//Is Tile lit
-			addPicScaled(x - 2 * TEXT_HEIGHT, y + 2 * TEXT_HEIGHT, LIT_TILE_IMAGE_PATH, g, 2);
+			addPicScaled(x - 4 * TEXT_HEIGHT, y - 3 * TEXT_HEIGHT, LIT_TILE_IMAGE_PATH, g, 2);
 		if(reachable[tile])										//Is Tile reachable
-			addPicScaled(x + 2 * TEXT_HEIGHT, y + 2 * TEXT_HEIGHT, REACHABLE_TILE_IMAGE_PATH, g, 2);
+			addPicScaled(x + 4 * TEXT_HEIGHT, y - 3 * TEXT_HEIGHT, REACHABLE_TILE_IMAGE_PATH, g, 2);
 	}
 		
 	private double changeInX(double angle, double hyp) {

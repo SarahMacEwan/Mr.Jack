@@ -35,7 +35,7 @@ public class GameController {
     public GameController(File f){
     	JFrame frame = readyFrame();
         theGame = new GameModel(f, CHARACTERS);
-        theView = new GameView();
+        theView = new GameView(this);
         frame.add(theView);
     }
     
@@ -53,10 +53,13 @@ public class GameController {
 
     public void conveyAction(int type, int[] actions){
     	switch(type) {
+    		case -1: startMrJack(); break;
     		case 0: theGame.moveMrJackCharacter(actions[0]); break;
     		case 1: theGame.characterAction(actions); break;
+    		case 2: theGame.chooseMrJackCharacter(actions[0]); break;
     		default: break;
     	}
+    	updateView();
     }
     
 //---  Helper Methods   -----------------------------------------------------------------------
