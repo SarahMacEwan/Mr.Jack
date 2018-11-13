@@ -1,47 +1,30 @@
 # Mr.Jack
-Tentative implementation of the Mr. Jack game for Comp 3721, Object Oriented Design, for Milestone 3 of Group Project 1.
-
-# Mr.Jack
-Tentative implementation of the Mr. Jack game for Comp 3721, Object Oriented Design, for Milestone 3 of Group Project 1.
+Extension of the Mr. Jack game for Comp 3721, Object Oriented Design, for Milestone 4.
 
 Responsibilities:
- - Mac:
-    - View
-    - Board (DONE)
-    - Clock (DONE)
-    - Tile
-    - nice code documentation
+ - Adam:
+    - Jeremy Bert
+    - Sherlock Holmes
+    - Madame
+    - Sergeant Goodley
  - Sarah:
-    - Controller
-    - Player (DONE)
-    - Character (DONE)
-    - View
-    - the writeup :D
-    -updated UML diagrams
- - Both
-    - Game
+    - John Pizer (and associate Tile objects)
+    - Joseph Lane
+    - John H. Watson
+    - Inspector Abberline
+ - Both:
+    - Spring-heeled Man
+    - Expanding the board
 
+Notes:
+- For right now I just randomly divided who will implement what character, hope that's ok :D
+- We need to add character classes for all the new characters, and make sure their abilities are all working
+- Probably need to make the gameboard a bit larger so that a character could move up to 6 tiles
+- Need to add a new type of tile (blockade) that can be placed on any regular tile to prevent motion and visibility over the blockade.
+- Other bug fixes??
 
- Things that are still a lot of work:
- - view
-    Mac: make the controller talk to the view
-    Sarah: make the GUI actually run and look nice(ish)
- - GameController
-    More heavily Mac?
- - GameModel
-    More heavily Sarah (though this might be reasonably quick)?
-
- Smaller tasks:
- - implementing the fine details of each class in the model
-    (each do the stuff for the classes specified above)
-  - develop tests
- - documentation in the code (Mac)
- - update the UML (Sarah)
- - writeup (Sarah, edited by Mac tomorrow :D)
-
-
-Characters we will implement:
-Ms. Stealthy - can move through buildings
-John Smith - swaps lanterns
-Sir Willium Gull - character swapper
-Inspector Lestrade - swaps police barriers
+We have already implemented:
+- Ms. Stealthy
+- John Smith
+- Sir William Gull
+- Inspector Lestrade
