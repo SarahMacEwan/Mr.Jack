@@ -11,12 +11,16 @@ import tile.Tile;
  * without going through any manholes/special tiles
  *
  *
- *I'm adding in another specification that they can't move way off the board if not possible.
  *
  */
 public class JohnPizer extends MrJackCharacter {
     @Override
     public boolean ability(Tile[] choice) {
+        /*he needs to:
+        get the tile he is on (choice)
+        get the neighbouring tiles and the characters that may be on those tiles
+        move each character nearby (if any) 3 hexes away
+        */
         return false;
     }
 
@@ -32,7 +36,7 @@ public class JohnPizer extends MrJackCharacter {
 
     @Override
     public boolean hasToDoAbility() {
-        return false;
+        return true;
     }
 
     @Override
@@ -47,6 +51,6 @@ public class JohnPizer extends MrJackCharacter {
 
     @Override
     public boolean canDoAbilityAfter() {
-        return false;
+        return true;
     }
 }
