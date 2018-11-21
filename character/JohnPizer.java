@@ -11,7 +11,7 @@ import tile.Tile;
  * without going through any manholes/special tiles
  *
  *
- *
+ *I'm adding in another specification that they can't move way off the board if not possible.
  *
  */
 public class JohnPizer extends MrJackCharacter {
