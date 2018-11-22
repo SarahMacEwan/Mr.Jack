@@ -148,7 +148,7 @@ public class GameModel {
 		if(reachable[choice]) {
 			currentMrJackCharacter.setLocation(choice);
 		}
-		if(currentMrJackCharacter.getDistance() == 1){
+		if(currentMrJackCharacter.getNumMoves() == 1){
 			currentMrJackCharacter.setNumMoves(currentMrJackCharacter.getNUMMOVES());
 		}
 		return reachable[choice];

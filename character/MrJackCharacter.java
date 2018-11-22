@@ -143,6 +143,8 @@ public abstract class MrJackCharacter {
 	public int getDistance() {
 		return numMoves;
 	}
+
+	public int getNumMoves(){ return numMoves;}
 	
 	public String getShortName() {
 		return shortName;
