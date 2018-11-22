@@ -83,4 +83,9 @@ public class SirWilliamGull extends MrJackCharacter{
 		return false;
 	}
 
+	@Override
+	public int getNUMMOVES(){
+		return NUM_MOVES;
+	}
+
 }

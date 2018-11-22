@@ -41,4 +41,9 @@ public class Madame extends MrJackCharacter{
     public boolean canDoAbilityAfter() {
         return false;
     }
+
+    @Override
+    public int getNUMMOVES(){
+        return NUM_MOVES;
+    }
 }

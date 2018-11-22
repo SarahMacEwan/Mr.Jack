@@ -135,7 +135,11 @@ public abstract class MrJackCharacter {
 	 * 
 	 * @return
 	 */
-	
+
+	public void setNumMoves(int newLimit){
+		numMoves = newLimit;
+	}
+
 	public int getDistance() {
 		return numMoves;
 	}
@@ -223,5 +227,7 @@ public abstract class MrJackCharacter {
 	 */
 	
 	public abstract boolean canDoAbilityAfter();
+
+	public abstract int getNUMMOVES();
 
 }

@@ -105,4 +105,9 @@ public class JohnSmith extends MrJackCharacter {
 		return true;
 	}
 
+	@Override
+	public int getNUMMOVES(){
+		return NUM_MOVES;
+	}
+
 }
