@@ -11,6 +11,8 @@ import game.GameModel;
  *
  */
 
+//TODO: Add numMoves getter and setter methods
+
 public abstract class MrJackCharacter {
 
 //---  Instance Variables   -------------------------------------------------------------------

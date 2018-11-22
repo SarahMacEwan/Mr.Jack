@@ -15,7 +15,7 @@ import javax.swing.JFrame;
 public class GameController {
 	
 //---  Constant Values   ----------------------------------------------------------------------
-	
+	//TODO: make 2 arrays, one to initialize basic characters, and one to initialze optional characters (2 of each)
 	private static final MrJackCharacter[] CHARACTERS = {new InspectorLestrade(),
 														 new JohnSmith(),
 														 new MissStealthy(),
