@@ -1,30 +1,22 @@
 # Mr.Jack
-Extension of the Mr. Jack game for Comp 3721, Object Oriented Design, for Milestone 4.
+Extension of the Mr. Jack game for Comp 3721, Object Oriented Design, for Milestone 5.
 
-Responsibilities:
- - Adam:
-    - Jeremy Bert
-    - Sherlock Holmes
-    - Madame
-    - Sergeant Goodley
- - Sarah:
-    - John Pizer (and associate Tile objects)
-    - Joseph Lane
-    - John H. Watson
-    - Inspector Abberline
- - Both:
-    - Spring-heeled Man
-    - Expanding the board
+##Responsibilities:
+###Adam:
+- Prevent Mr. Jack from escaping in the first round
+  - ie make sure he is "seen" and that the seen/hidden functionality is working properly
+###Sarah:
+- implement a new character 
+  - (probably Jeremy Bert because apparently that is a basic character listed in the assignment description??)
+###Both:
+- Figure out how to place characters on the board at setup
 
-Notes:
-- For right now I just randomly divided who will implement what character, hope that's ok :D
-- We need to add character classes for all the new characters, and make sure their abilities are all working
-- Probably need to make the gameboard a bit larger so that a character could move up to 6 tiles
-- Need to add a new type of tile (blockade) that can be placed on any regular tile to prevent motion and visibility over the blockade.
-- Other bug fixes??
-
-We have already implemented:
-- Ms. Stealthy
-- John Smith
-- Sir William Gull
-- Inspector Lestrade
+##Notes:
+- idk if you want to do the seen/unseen thing or implement a new character? I'm chill either way :)
+- We have already implemented:
+  - Ms. Stealthy
+  - John Smith
+  - Sir William Gull
+  - Inspector Lestrade
+  - Inspector Abberline
+  - Madame
