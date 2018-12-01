@@ -10,11 +10,6 @@ import tile.Tile;
 /**
  * If a character is on a tile adjacent to Inspector Abberline, their movement from that point forward
  * is restricted to only one tile
- *
- *
- *I'm thinking it might be a good idea to add to the MrJackCharacter class an attribute that each character has saying
- * that they've been "Abberlined" meaning from now on they can only move one hex on a turn.
- * If that is a bad plan we can always reverse that decision because everything is saved with version control :D
  */
 public class InspectorAbberline extends MrJackCharacter{
 
